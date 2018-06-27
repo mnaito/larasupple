@@ -4,5 +4,17 @@
     "type": "laravel-package",
     "license": "MIT",
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Mits430\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mits430\\Larasupple\\LarasuppleServiceProvider"
+            ]
+        }
+    }
 }
