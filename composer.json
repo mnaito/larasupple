@@ -1,0 +1,8 @@
+{
+    "name": "mits430/larasupple",
+    "description": "A project-wide extension for Laravel Framework.",
+    "type": "laravel-package",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {}
+}
