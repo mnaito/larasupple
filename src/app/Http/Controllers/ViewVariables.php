@@ -1,7 +1,23 @@
 <?php
+namespace Mits430\Larasupple;
+
 /**
- * Created by PhpStorm.
- * User: mnaito
- * Date: 2018/06/27
- * Time: 22:26
+ * Manages view variables
  */
+trait ViewVariables
+{
+    /**
+     * @var array variables for view template engine
+     */
+    protected $viewVariables = [];
+
+    /**
+     * set view variable
+     * @param $name
+     * @param $var
+     */
+    public function set($name, $var)
+    {
+        $this->viewVariables[$name] = $var;
+    }
+}

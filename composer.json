@@ -1,10 +1,14 @@
 {
-    "name": "mits430/larasupple",
+    "name": "mnaito/larasupple",
     "description": "A project-wide extension for Laravel Framework.",
     "type": "laravel-package",
     "license": "MIT",
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "ytake/laravel-smarty": "^2.2",
+        "barryvdh/laravel-debugbar": "^3.1",
+        "guzzlehttp/guzzle": "^6.3"
+    },
     "autoload": {
         "psr-4": {
             "Mits430\\": "src/"
