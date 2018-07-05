@@ -14,7 +14,12 @@ class LarasuppleServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        //include __DIR__ . '/routes/web.php';
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'larasupple');
+        
+        $this->publishes([
+            __DIR__.'/config/ytake-laravel-smarty.php' => config_path('ytake-laravel-smarty.php'),
+            __DIR__.'/.env.example'                    => base_path(),
+        ]);
     }
 
     /**

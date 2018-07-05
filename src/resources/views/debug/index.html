@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Debug</title>
+	<link type="text/css" rel="stylesheet" href="/supplements/assets/css/bootstrap.min.css">
+
+	<style>
+		body { margin: 0px; margin-bottom: 50px;}
+		.top-buffer { margin-top:30px; }
+	</style>
+
+	<script type="text/javascript" src="/supplements/assets/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/supplements/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/supplements/assets/js/jquery.dump.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="col-md-12">
+			<h2>Debug</h2>
+			<hr>
+		</div>
+		<div class="col-md-12 top-buffer">
+			<h4>Debug/API actions</h4>
+			<ul class="nav nav-pills">
+				<li class="active"><a href="#list-debug" data-toggle="tab">Debug actions</a></li>
+				<li><a href="#list-api" data-toggle="tab">Debug APIs</a></li>
+			</ul>
+			<div class="tab-content top-buffer">
+				<div class="tab-pane active" id="list-debug">
+					<!--{if $debugActions}-->
+					<table class="table table-striped table-condensed">
+						<thead>
+							<tr>
+								<th>Action</th>
+								<th>Comment</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--{foreach from=$debugActions key=key item=item}-->
+							<tr>
+								<td><a href="/debug/<!--{$item.action}-->" target="_blank">action_<!--{$item.action|escape}--></a></td>
+								<td><!--{$item.comment|escape|nl2br}--></td>
+							</tr>
+							<!--{/foreach}-->
+						</tbody>
+					</table>
+					<!--{else}-->
+						<div class="alert alert-info">
+							<strong>No method found</strong> There is no available debug method found.
+						</div>
+					<!--{/if}-->
+				</div>
+				<div class="tab-pane" id="list-api">
+					<!--{if $apis}-->
+						<table class="table table-striped table-condensed">
+							<thead>
+								<tr>
+									<th>Action</th>
+									<th>Comment</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--{foreach from=$apis item=api}-->
+								<!--{foreach from=$api.actions item=action}-->
+								<tr>
+									<td><a href="/debugapi/<!--{$api.class}-->/<!--{$action.name}-->/noerror/" target="_blank"><!--{$api.actualClass}-->::<!--{$action.actualName}--></a></td>
+									<td><!--{$action.comment|escape}--></td>
+								</tr>
+								<!--{/foreach}-->
+								<!--{/foreach}-->
+							</tbody>
+						</table>
+					<!--{else}-->
+						<div class="alert alert-info">
+							<strong>No API found</strong> There is no available API found.
+						</div>
+					<!--{/if}-->
+				</div>
+			</div>
+		</div>
+		
+		<footer class="top-buffer">
+			<p class="pull-right">Page rendered in {exec_time}s using {mem_usage}mb of memory.</p>
+			<p>
+				<a href="http://fuelphp.com">FuelPHP</a> is released under the MIT license.<br>
+				<small>Version: 1.7.2</small>
+			</p>
+		</footer>
+		
+		
+	</div>
+</body>
+</html>

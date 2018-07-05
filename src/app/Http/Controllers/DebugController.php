@@ -62,9 +62,9 @@ class DebugController extends Controller
         }
 
         //TODO: m.naito - needed to improve more
-        dump($debugActions);
         $this->set('debugActions', $debugActions);
 
+        return view('larasupple::debug/index')->with($debugActions);
         //TODO: m.naito - not yet supported
         /*
         // discover APIs
