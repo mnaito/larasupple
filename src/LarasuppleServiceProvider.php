@@ -20,6 +20,7 @@ class LarasuppleServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/config/ytake-laravel-smarty.php' => config_path('ytake-laravel-smarty.php'),
             __DIR__.'/.env.example'                    => base_path(),
+            __DIR__.'/public/vendor/larasupple'        => public_path('vendor/larasupple'),
         ]);
 
         //
