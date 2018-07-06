@@ -32,10 +32,8 @@ trait ViewSelector
     {
         // テンプレート名が設定されていない場合、現在のコントローラーとアクションからビューを特定する
         if ($template === null) {
-            $request = Request::instance();
-
             // リクエストされたURLの階層通りにビューパスを作成
-            $requestedPath = $request->path();
+            $requestedPath = Request::get('requestUriWithoutExtension');
             $requestedPath = explode('/', $requestedPath);
             if (count($requestedPath) == 1) {
                 $requestedPath[] = 'index';

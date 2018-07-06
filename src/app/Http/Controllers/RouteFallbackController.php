@@ -1,27 +1,14 @@
 <?php
 namespace Mits430\Larasupple\Controller;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Request;
 
 /**
  * A RouteFallbackController
  * @package Mits430\Larasupple
  */
-class RouteFallbackAbstractController extends AbstractController
+class RouteFallbackController extends AbstractController
 {
-    /**
-     * @var Router
-     */
-    protected $router;
-
-    /**
-     * RouteFallbackController constructor.
-     * @param Router $router
-     */
-    public function __construct(Router $router)
-    {
-        $this->router = $router;
-    }
-
     /**
      * @param null $fallbackPlaceholder
      */
@@ -30,7 +17,7 @@ class RouteFallbackAbstractController extends AbstractController
         $view = null;
         try {
             // look for a view with the requested file name
-            $view = view($fallbackPlaceholder);
+            $view = view(Request::get('requestUriWithoutExtension'));
         }
         // Laravel throws this exception when no matching view is found inside
         catch (\InvalidArgumentException $e) {
