@@ -1,12 +1,12 @@
 <?php
-namespace Mits430\Larasupple;
+namespace Mits430\Larasupple\Controller;
 use Illuminate\Routing\Router;
 
 /**
  * A RouteFallbackController
  * @package Mits430\Larasupple
  */
-class RouteFallbackController extends Controller
+class RouteFallbackAbstractController extends AbstractController
 {
     /**
      * @var Router

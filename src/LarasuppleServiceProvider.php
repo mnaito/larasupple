@@ -4,6 +4,7 @@ namespace Mits430\Larasupple;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Mits430\Larasupple\Middleware\AutoViewselect;
 
 class LarasuppleServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,10 @@ class LarasuppleServiceProvider extends ServiceProvider
             __DIR__.'/config/ytake-laravel-smarty.php' => config_path('ytake-laravel-smarty.php'),
             __DIR__.'/.env.example'                    => base_path(),
         ]);
+
+        //
+        $router = $this->app['router'];
+        $router->pushMiddlewareToGroup('web', AutoViewselect::class);
     }
 
     /**

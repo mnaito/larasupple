@@ -1,6 +1,10 @@
 <?php
-namespace Mits430\Larasupple;
+namespace Mits430\Larasupple\Controller;
 
-class AbstractTemplatedController extends Controller
+use Illuminate\Routing\Router;
+use Illuminate\Routing\Controller as BaseController;
+
+abstract class AbstractTemplatedController extends BaseController
 {
+    use ViewSelector;
 }

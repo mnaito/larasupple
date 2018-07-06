@@ -1,5 +1,5 @@
 <?php
-namespace Mits430\Larasupple;
+namespace Mits430\Larasupple\Controller;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\App;
@@ -8,23 +8,13 @@ use Illuminate\Support\Facades\App;
  * Debug Controller
  * @author mnaito
  */
-class DebugController extends Controller
+class DebugController extends AbstractTemplatedController
 {
-    use ViewVariables;
-
-    /**
-     * @var Router
-     */
-    protected $router;
-
     /**
      * DebugController constructor.
-     * @param Router $router injected from Laravel
      */
-    public function __construct(Router $router)
+    public function __construct()
     {
-        $this->router = $router;
-
         // decline this request if APP_ENV is either local or dev
         if (!App::environment(['local', 'dev'])) {
             abort(404);
@@ -64,7 +54,8 @@ class DebugController extends Controller
         //TODO: m.naito - needed to improve more
         $this->set('debugActions', $debugActions);
 
-        return view('larasupple::debug/index')->with($debugActions);
+        return self::template('larasupple::debug/index');
+
         //TODO: m.naito - not yet supported
         /*
         // discover APIs
