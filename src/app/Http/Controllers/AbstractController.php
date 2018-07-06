@@ -1,6 +1,6 @@
 <?php
 
-namespace Mits430\Larasupple\Controller;
+namespace Mits430\Larasupple\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;

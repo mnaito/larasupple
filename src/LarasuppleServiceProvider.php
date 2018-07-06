@@ -45,7 +45,7 @@ class LarasuppleServiceProvider extends ServiceProvider
     {
         // all routing written within this package should be as belonged package
         $router
-            ->namespace('\Mits430\Larasupple')
+            ->namespace('\Mits430\Larasupple\Controllers')
             ->group(function ($router) {
                 require(__DIR__ . '/routes/web.php');
         });

@@ -1,5 +1,5 @@
 <?php
-namespace Mits430\Larasupple\Controller;
+namespace Mits430\Larasupple\Controllers;
 
 use Illuminate\Support\Facades\Request;
 

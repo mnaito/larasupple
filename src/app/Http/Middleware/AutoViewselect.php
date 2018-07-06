@@ -3,7 +3,7 @@
 namespace Mits430\Larasupple\Middleware;
 
 use Closure;
-use Mits430\Larasupple\Controller\ViewSelector;
+use Mits430\Larasupple\Controllers\ViewSelector;
 
 /**
  * Class AutoViewselect

@@ -1,6 +1,5 @@
 <?php
-namespace Mits430\Larasupple\Controller;
-use Illuminate\Routing\Router;
+namespace Mits430\Larasupple\Controllers;
 use Illuminate\Support\Facades\Request;
 
 /**

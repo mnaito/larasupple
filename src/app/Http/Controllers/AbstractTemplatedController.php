@@ -1,5 +1,5 @@
 <?php
-namespace Mits430\Larasupple\Controller;
+namespace Mits430\Larasupple\Controllers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Routing\Controller as BaseController;

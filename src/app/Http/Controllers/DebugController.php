@@ -1,8 +1,9 @@
 <?php
-namespace Mits430\Larasupple\Controller;
+namespace Mits430\Larasupple\Controllers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Route;
 
 /**
  * Debug Controller
@@ -29,7 +30,7 @@ class DebugController extends AbstractTemplatedController
         // discovered debug actions
         $debugActions = [];
 
-        $reflect = new \ReflectionClass(get_class($this->router->current()->controller));
+        $reflect = new \ReflectionClass(get_class(Route::current()->controller));
 
         // Ensure we only pull out the public methods
         $methods = $reflect->getMethods(\ReflectionMethod::IS_PUBLIC);
