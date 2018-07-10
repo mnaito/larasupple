@@ -5,7 +5,8 @@ namespace Mits430\Larasupple;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Mits430\Larasupple\Middleware\AutoViewselect;
-use Mits430\Larasupple\Middleware\RequestIDLogging;
+use Mits430\Larasupple\Middleware\RequestLogger;
+use Mits430\Larasupple\Middleware\ResponseLogger;
 
 class LarasuppleServiceProvider extends ServiceProvider
 {
@@ -27,7 +28,8 @@ class LarasuppleServiceProvider extends ServiceProvider
         //
         $router = $this->app['router'];
         $router->pushMiddlewareToGroup('web', AutoViewselect::class);
-        $router->pushMiddlewareToGroup('web', RequestIDLogging::class);
+        $router->pushMiddlewareToGroup('web', RequestLogger::class);
+        $router->pushMiddlewareToGroup('web', ResponseLogger::class);
     }
 
     /**
