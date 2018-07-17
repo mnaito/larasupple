@@ -12,7 +12,7 @@ class RequestLogger
 	public function handle($request, Closure $next, $guard = null) {
 		// リクエストUUID採番
 		$request = \Illuminate\Support\Facades\Request::instance();
-		$requestUUID = str_random(40);
+		$requestUUID = (string)\Illuminate\Support\Str::uuid();
 		$request->attributes->add(['requestUUID' => $requestUUID]);
 		
         \Log::debug('Creating a new main Request with URI = "'. $request->getPathInfo() .'"');
