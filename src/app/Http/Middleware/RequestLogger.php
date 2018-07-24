@@ -15,8 +15,16 @@ class RequestLogger
 		$requestUUID = (string)\Illuminate\Support\Str::uuid();
 		$request->attributes->add(['requestUUID' => $requestUUID]);
 		
-        \Log::debug('Creating a new main Request with URI = "'. $request->getPathInfo() .'"');
-        \Log::debug('Method '. $request->method() .'. parameters ' . print_r($request->query(), true));
+		// APIとWEBでログを1部分ける
+		$requestType = '';
+		if(preg_match("/^\/api\//", $request->getPathInfo())){
+			$requestType = 'API';
+		} else {
+			$requestType = 'main';
+		}
+		
+		\Log::debug('Creating a new ' . $requestType . ' Request with URI = "'. $request->getPathInfo() .'"');
+		\Log::debug('Method '. $request->method() .'. parameters ' . print_r($request->query(), true));
 		
 		return $next($request);
 	}

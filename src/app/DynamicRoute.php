@@ -73,4 +73,42 @@ class DynamicRoute
             return App::call(\App\Http\Controllers\RouteFallbackController::class.'@handle');
         }
     }
+	
+	public static function goDynamicRouteAPI(Request $request, $uri)
+    {
+        // path情報
+        $pathInfo = pathinfo($uri);
+        $request->attributes->add(['requestPathInfo' => $pathInfo]);
+		$uriWithoutExtension = $uri;
+
+        // リクエストURIをパス文字で展開
+        $pathComponents = explode('/', $uriWithoutExtension);
+
+        // 後続処理で使用するために拡張子を取り除いたURIを保存
+        $request->attributes->add(['requestUriWithoutExtension' => $uriWithoutExtension]);
+
+        // 先頭大文字に変換してクラス名とする
+        array_walk($pathComponents, function (&$item) {
+            $item = ucfirst($item);
+        });
+
+        // action , controller 名を決める
+        $action = array_pop($pathComponents);
+        $controller = ucfirst(array_pop($pathComponents)) . 'Controller';
+
+        $namespacePart = implode('\\', array_filter($pathComponents));
+        $fullNamespace = "\\App\\Http\\API\\{$namespacePart}";
+        $controllerName = "{$fullNamespace}\\{$controller}";
+        $controllerName = str_replace('\\\\', '\\', $controllerName);
+
+        // クラスの有無を得る
+        try {
+            $ref = new \ReflectionClass($controllerName);
+            $ref->getMethod($action);
+            return App::call("{$controllerName}@{$action}");
+        } catch (\ReflectionException $e) {
+            // アクションなし、404
+            return response()->json(['message' => 'Not Found'], 404);
+        }
+    }
 }

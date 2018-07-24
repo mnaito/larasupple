@@ -15,6 +15,11 @@ class ResponseLogger
     }
 	
 	public function terminate($request, $response) {
-        \Log::debug('HTTP finish. status code '. $response->status());
+		$requestType = '';
+		if(preg_match("/^\/api\//", $request->getPathInfo())){
+			\Log::debug('API finish. status code '. $response->status() . '. Response ' . $response->getContent());
+		} else {
+			\Log::debug('HTTP finish. status code '. $response->status());
+		}
 	}
 }
