@@ -76,7 +76,7 @@ class ManyMany extends Relation
 
 		if ( ! class_exists($this->model_to))
 		{
-			throw new \FuelException('Related model not found by Many_Many relation "'.$this->name.'": '.$this->model_to);
+			throw new \Mits430\Larasupple\Packages\FuelException('Related model not found by Many_Many relation "'.$this->name.'": '.$this->model_to);
 		}
 		$this->model_to = get_real_class($this->model_to);
 	}
@@ -112,15 +112,15 @@ class ManyMany extends Relation
 			next($this->key_to);
 		}
 
-		$conditions = \Arr::merge($this->conditions, $conditions);
+		$conditions = \Mits430\Larasupple\Packages\Arr::merge($this->conditions, $conditions);
 
-		foreach (\Arr::get($conditions, 'where', array()) as $key => $condition)
+		foreach (\Mits430\Larasupple\Packages\Arr::get($conditions, 'where', array()) as $key => $condition)
 		{
 			is_array($condition) or $condition = array($key, '=', $condition);
 			$query->where($condition);
 		}
 
-		foreach (\Arr::get($conditions, 'order_by', array()) as $field => $direction)
+		foreach (\Mits430\Larasupple\Packages\Arr::get($conditions, 'order_by', array()) as $field => $direction)
 		{
 			if (strpos($field, '.') !== false)
 			{
@@ -174,7 +174,7 @@ class ManyMany extends Relation
 				'connection'   => call_user_func(array($this->model_to, 'connection')),
 				'table'        => $alias_through,
 				'primary_key'  => null,
-				'join_type'    => \Arr::get($conditions, 'join_type') ?: \Arr::get($this->conditions, 'join_type', 'left'),
+				'join_type'    => \Mits430\Larasupple\Packages\Arr::get($conditions, 'join_type') ?: \Mits430\Larasupple\Packages\Arr::get($this->conditions, 'join_type', 'left'),
 				'join_on'      => array(),
 				'columns'      => $this->select_through($alias_to.'_through'),
 				'rel_name'     => $this->model_through,
@@ -185,12 +185,12 @@ class ManyMany extends Relation
 				'connection'   => call_user_func(array($this->model_to, 'connection')),
 				'table'        => $alias_to_table,
 				'primary_key'  => call_user_func(array($this->model_to, 'primary_key')),
-				'join_type'    => \Arr::get($conditions, 'join_type') ?: \Arr::get($this->conditions, 'join_type', 'left'),
+				'join_type'    => \Mits430\Larasupple\Packages\Arr::get($conditions, 'join_type') ?: \Mits430\Larasupple\Packages\Arr::get($this->conditions, 'join_type', 'left'),
 				'join_on'      => array(),
 				'columns'      => $this->select($alias_to),
 				'rel_name'     => strpos($rel_name, '.') ? substr($rel_name, strrpos($rel_name, '.') + 1) : $rel_name,
 				'relation'     => $this,
-				'where'        => \Arr::get($conditions, 'where', array()),
+				'where'        => \Mits430\Larasupple\Packages\Arr::get($conditions, 'where', array()),
 			),
 		);
 
@@ -208,12 +208,12 @@ class ManyMany extends Relation
 			next($this->key_to);
 		}
 
-		foreach (array(\Arr::get($this->conditions, 'where', array()), \Arr::get($conditions, 'join_on', array())) as $c)
+		foreach (array(\Mits430\Larasupple\Packages\Arr::get($this->conditions, 'where', array()), \Mits430\Larasupple\Packages\Arr::get($conditions, 'join_on', array())) as $c)
 		{
 			foreach ($c as $key => $condition)
 			{
 				! is_array($condition) and $condition = array($key, '=', $condition);
-				if ( ! $condition[0] instanceof \Fuel\Core\Database_Expression and strpos($condition[0], '.') === false)
+				if ( ! $condition[0] instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression and strpos($condition[0], '.') === false)
 				{
 					$condition[0] = $alias_to.'.'.$condition[0];
 				}
@@ -223,10 +223,10 @@ class ManyMany extends Relation
 			}
 		}
 
-		$order_by = \Arr::get($conditions, 'order_by') ?: \Arr::get($this->conditions, 'order_by', array());
+		$order_by = \Mits430\Larasupple\Packages\Arr::get($conditions, 'order_by') ?: \Mits430\Larasupple\Packages\Arr::get($this->conditions, 'order_by', array());
 		foreach ($order_by as $key => $direction)
 		{
-			if ( ! $key instanceof \Fuel\Core\Database_Expression and strpos($key, '.') === false)
+			if ( ! $key instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression and strpos($key, '.') === false)
 			{
 				$key = $alias_to.'.'.$key;
 			}
@@ -249,7 +249,7 @@ class ManyMany extends Relation
 
 		if ( ! is_array($models_to) and ($models_to = is_null($models_to) ? array() : $models_to) !== array())
 		{
-			throw new \FuelException('Assigned relationships must be an array or null, given relationship value for '.
+			throw new \Mits430\Larasupple\Packages\FuelException('Assigned relationships must be an array or null, given relationship value for '.
 				$this->name.' is invalid.');
 		}
 		$original_model_ids === null and $original_model_ids = array();
@@ -259,7 +259,7 @@ class ManyMany extends Relation
 		{
 			if ( ! $model_to instanceof $this->model_to)
 			{
-				throw new \FuelException('Invalid Model instance added to relations in this model.');
+				throw new \Mits430\Larasupple\Packages\FuelException('Invalid Model instance added to relations in this model.');
 			}
 
 			// Save if it's a yet unsaved object

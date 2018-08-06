@@ -11,9 +11,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-class Database_MySQLi_Result extends \Database_Result
+class Database_MySQLi_Result extends \Mits430\Larasupple\Vendor\Database\Database_Result
 {
 	protected $_internal_row = 0;
 

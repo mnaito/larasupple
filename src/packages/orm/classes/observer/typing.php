@@ -541,16 +541,16 @@ class Observer_Typing
 	/**
 	 * Takes a Date instance and transforms it into a DB timestamp
 	 *
-	 * @param   \Fuel\Core\Date  value
+	 * @param   \Mits430\Larasupple\Vendor\Database;\Date  value
 	 * @param   array  any options to be passed
 	 *
 	 * @throws  InvalidContentType
 	 *
 	 * @return  int|string
 	 */
-	public static function type_time_encode(\Fuel\Core\Date $var, array $settings)
+	public static function type_time_encode(\Mits430\Larasupple\Vendor\Database\Date $var, array $settings)
 	{
-		if ( ! $var instanceof \Fuel\Core\Date)
+		if ( ! $var instanceof \Mits430\Larasupple\Vendor\Database\Date)
 		{
 			throw new InvalidContentType('Value must be an instance of the Date class.');
 		}
@@ -569,7 +569,7 @@ class Observer_Typing
 	 * @param   string  value
 	 * @param   array  any options to be passed
 	 *
-	 * @return  \Fuel\Core\Date
+	 * @return  \Mits430\Larasupple\Vendor\Database;\Date
 	 */
 	public static function type_time_decode($var, array $settings)
 	{

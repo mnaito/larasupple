@@ -11,9 +11,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-class Database_SQLite_Builder_Delete extends \Database_Query_Builder_Delete
+class Database_SQLite_Builder_Delete extends \Mits430\Larasupple\Vendor\Database\Database_Query_Builder_Delete
 {
 	/**
 	 * Compile the SQL query and return it.
@@ -24,10 +24,10 @@ class Database_SQLite_Builder_Delete extends \Database_Query_Builder_Delete
 	 */
 	public function compile($db = null)
 	{
-		if ( ! $db instanceof \Database_Connection)
+		if ( ! $db instanceof \Mits430\Larasupple\Vendor\Database\Database_Connection)
 		{
 			// Get the database instance
-			$db = \Database_Connection::instance($db);
+			$db = \Mits430\Larasupple\Vendor\Database\Database_Connection::instance($db);
 		}
 
 		// Start a deletion query

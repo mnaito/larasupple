@@ -11,9 +11,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-class Database_Query_Builder_Insert extends \Database_Query_Builder
+class Database_Query_Builder_Insert extends \Mits430\Larasupple\Vendor\Database\Database_Query_Builder
 {
 	/**
 	 * @var string  $_table  table
@@ -83,7 +83,7 @@ class Database_Query_Builder_Insert extends \Database_Query_Builder
 	/**
 	 * Adds values. Multiple value sets can be added.
 	 *
-	 * @throws \FuelException
+	 * @throws \Mits430\Larasupple\Packages\FuelException
 	 * @param array $values
 	 * @return $this
 	 */
@@ -91,7 +91,7 @@ class Database_Query_Builder_Insert extends \Database_Query_Builder
 	{
 		if ( ! is_array($this->_values))
 		{
-			throw new \FuelException('INSERT INTO ... SELECT statements cannot be combined with INSERT INTO ... VALUES');
+			throw new \Mits430\Larasupple\Packages\FuelException('INSERT INTO ... SELECT statements cannot be combined with INSERT INTO ... VALUES');
 		}
 
 		// Get all of the passed values
@@ -135,13 +135,13 @@ class Database_Query_Builder_Insert extends \Database_Query_Builder
 	 *
 	 * @return  $this
 	 *
-	 * @throws \FuelException
+	 * @throws \Mits430\Larasupple\Packages\FuelException
 	 */
 	public function select(Database_Query $query)
 	{
 		if ($query->type() !== \DB::SELECT)
 		{
-			throw new \FuelException('Only SELECT queries can be combined with INSERT queries');
+			throw new \Mits430\Larasupple\Packages\FuelException('Only SELECT queries can be combined with INSERT queries');
 		}
 
 		$this->_values = $query;
@@ -158,10 +158,10 @@ class Database_Query_Builder_Insert extends \Database_Query_Builder
 	 */
 	public function compile($db = null)
 	{
-		if ( ! $db instanceof \Database_Connection)
+		if ( ! $db instanceof \Mits430\Larasupple\Vendor\Database\Database_Connection)
 		{
 			// Get the database instance
-			$db = \Database_Connection::instance($db);
+			$db = \Mits430\Larasupple\Vendor\Database\Database_Connection::instance($db);
 		}
 
 		// Start an insertion query

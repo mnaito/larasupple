@@ -11,9 +11,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-class Database_Result_Cached extends \Database_Result
+class Database_Result_Cached extends \Mits430\Larasupple\Vendor\Database\Database_Result
 {
 	/**
 	 * @param  array   $result

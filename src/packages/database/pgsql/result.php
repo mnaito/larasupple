@@ -11,9 +11,9 @@
  * @license	http://kohanaphp.com/license
  */
 
-namespace Supplements\Core;
+namespace Mits430\Larasupple\Packages\Database;
 
-class Database_Pgsql_Result extends \Fuel\Core\Database_Result {
+class Database_Pgsql_Result extends \Mits430\Larasupple\Vendor\Database\Database_Result {
 
 	protected $_internal_row = 0;
 

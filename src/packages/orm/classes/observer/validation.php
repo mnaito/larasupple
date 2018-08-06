@@ -17,7 +17,7 @@ namespace Orm;
 /**
  *  Exception to throw when validation failed
  */
-class ValidationFailed extends \FuelException
+class ValidationFailed extends \Mits430\Larasupple\Packages\FuelException
 {
 	/**
 	 * @var  Fieldset the fieldset causing this exception
@@ -25,7 +25,7 @@ class ValidationFailed extends \FuelException
 	protected $fieldset;
 
 	/**
-	 * Overridden \FuelException construct to add a Fieldset instance into the exception
+	 * Overridden \Mits430\Larasupple\Packages\FuelException construct to add a Fieldset instance into the exception
 	 *
 	 * @param  string  the error message
 	 * @param  int  the error code
@@ -106,7 +106,7 @@ class Observer_Validation extends Observer
 
 		foreach ($properties as $p => $settings)
 		{
-			if (\Arr::get($settings, 'skip', in_array($p, $primary_keys)))
+			if (\Mits430\Larasupple\Packages\Arr::get($settings, 'skip', in_array($p, $primary_keys)))
 			{
 				continue;
 			}

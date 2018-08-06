@@ -24,7 +24,7 @@ class RecordNotFound extends \OutOfBoundsException {}
  */
 class FrozenObject extends \RuntimeException {}
 
-class Model implements \ArrayAccess, \Iterator, \Sanitization
+class Model implements \Mits430\Larasupple\Packages\ArrayAccess, \Iterator, \Mits430\Larasupple\Packages\Sanitization
 {
 	/* ---------------------------------------------------------------------------
 	 * Static usage
@@ -293,7 +293,7 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization
     /**
      * Get the class's properties
      *
-     * @throws \FuelException Listing columns failed
+     * @throws \Mits430\Larasupple\Packages\FuelException Listing columns failed
      *
      * @return  array
      */
@@ -330,7 +330,7 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization
 			}
 			catch (\Exception $e)
 			{
-				throw new \FuelException('Listing columns failed, you have to set the model properties with a '.
+				throw new \Mits430\Larasupple\Packages\FuelException('Listing columns failed, you have to set the model properties with a '.
 					'static $_properties setting in the model. Original exception: '.$e->getMessage());
 			}
 		}
@@ -358,7 +358,7 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization
 			static::properties();
 		}
 
-		return \Arr::get(static::$_properties_cached[$class], $key, $default);
+		return \Mits430\Larasupple\Packages\Arr::get(static::$_properties_cached[$class], $key, $default);
 	}
 
     /**
@@ -508,7 +508,7 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization
 
 		if ($specific)
 		{
-			return \Arr::get(static::$_observers_cached[$class], $specific, $default);
+			return \Mits430\Larasupple\Packages\Arr::get(static::$_observers_cached[$class], $specific, $default);
 		}
 
 		return static::$_observers_cached[$class];
@@ -552,7 +552,7 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization
      * @param int|null $id
      * @param array $options
      *
-     * @throws \FuelException
+     * @throws \Mits430\Larasupple\Packages\FuelException
      *
      * @return  Model|Model[]
      */
@@ -682,7 +682,7 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization
 		// God knows, complain
 		else
 		{
-			throw new \FuelException('Invalid method call.  Method '.$method.' does not exist.', 0);
+			throw new \Mits430\Larasupple\Packages\FuelException('Invalid method call.  Method '.$method.' does not exist.', 0);
 		}
 
 		$where = $or_where = array();
@@ -944,7 +944,7 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization
      *
      * @param array|bool|null $rels
      *
-     * @throws \FuelException  Invalid input for _relate(), should be an array
+     * @throws \Mits430\Larasupple\Packages\FuelException  Invalid input for _relate(), should be an array
      * @throws FrozenObject    No changes allowed
      *
      * @return  void|array
@@ -965,7 +965,7 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization
 		}
 		else
 		{
-			throw new \FuelException('Invalid input for _relate(), should be an array.');
+			throw new \Mits430\Larasupple\Packages\FuelException('Invalid input for _relate(), should be an array.');
 		}
 	}
 
@@ -1208,7 +1208,7 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization
      * @param   string|array $property
      * @param   string $value in case $property is a string
      *
-     * @throws \FuelException Primary key on model cannot be changed
+     * @throws \Mits430\Larasupple\Packages\FuelException Primary key on model cannot be changed
      * @throws \InvalidArgumentException You need to pass both a property name and a value to set()
      * @throws FrozenObject No changes allowed
      *
@@ -1237,7 +1237,7 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization
 
 			if (in_array($property, static::primary_key()) and $this->{$property} !== null and $this->{$property} != $value)
 			{
-				throw new \FuelException('Primary key on model '.get_class($this).' cannot be changed.');
+				throw new \Mits430\Larasupple\Packages\FuelException('Primary key on model '.get_class($this).' cannot be changed.');
 			}
 			if (array_key_exists($property, static::properties()))
 			{
@@ -2123,14 +2123,14 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization
 				}
 
 				// determine attribute and value column names
-				$attr = \Arr::get($settings, 'attribute', 'attribute');
-				$val  = \Arr::get($settings, 'value', 'value');
+				$attr = \Mits430\Larasupple\Packages\Arr::get($settings, 'attribute', 'attribute');
+				$val  = \Mits430\Larasupple\Packages\Arr::get($settings, 'value', 'value');
 
 				// check if relation is present
 				if (array_key_exists($rel, $array))
 				{
 					// get eav properties
-					$container = \Arr::assoc_to_keyval($array[$rel], $attr, $val);
+					$container = \Mits430\Larasupple\Packages\Arr::assoc_to_keyval($array[$rel], $attr, $val);
 
 					// merge eav properties to array without overwritting anything
 					$array = array_merge($container, $array);

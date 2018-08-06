@@ -11,9 +11,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-class Database_Query_Builder_Select extends \Database_Query_Builder_Where
+class Database_Query_Builder_Select extends \Mits430\Larasupple\Vendor\Database\Database_Query_Builder_Where
 {
 	/**
 	 * @var array  $_select  columns to select
@@ -144,7 +144,7 @@ class Database_Query_Builder_Select extends \Database_Query_Builder_Where
 	 */
 	public function join($table, $type = NULL)
 	{
-		$this->_join[] = $this->_last_join = new \Database_Query_Builder_Join($table, $type);
+		$this->_join[] = $this->_last_join = new \Mits430\Larasupple\Vendor\Database\Database_Query_Builder_Join($table, $type);
 
 		return $this;
 	}
@@ -392,10 +392,10 @@ class Database_Query_Builder_Select extends \Database_Query_Builder_Where
 	 */
 	public function compile($db = null)
 	{
-		if ( ! $db instanceof \Database_Connection)
+		if ( ! $db instanceof \Mits430\Larasupple\Vendor\Database\Database_Connection)
 		{
 			// Get the database instance
-			$db = $this->_connection ?: \Database_Connection::instance($db);
+			$db = $this->_connection ?: \Mits430\Larasupple\Vendor\Database\Database_Connection::instance($db);
 		}
 
 		// Callback to quote identifiers

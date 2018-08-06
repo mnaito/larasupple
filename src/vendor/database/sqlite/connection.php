@@ -11,9 +11,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-class Database_SQLite_Connection extends \Database_PDO_Connection
+class Database_SQLite_Connection extends \Mits430\Larasupple\Vendor\Database\Database_PDO_Connection
 {
 	/**
 	 * Create a new [Database_Query_Builder_Update].
@@ -50,7 +50,7 @@ class Database_SQLite_Connection extends \Database_PDO_Connection
 	 *
 	 * @param string $like
 	 *
-	 * @throws \FuelException
+	 * @throws \Mits430\Larasupple\Packages\FuelException
 	 */
 	public function list_tables($like = null)
 	{

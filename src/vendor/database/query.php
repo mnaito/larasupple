@@ -11,7 +11,7 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
 class Database_Query
 {
@@ -195,10 +195,10 @@ class Database_Query
 	 */
 	public function set_connection($db)
 	{
-		if ( ! $db instanceof \Database_Connection)
+		if ( ! $db instanceof \Mits430\Larasupple\Vendor\Database\Database_Connection)
 		{
 			// Get the database instance
-			$db = \Database_Connection::instance($db);
+			$db = \Mits430\Larasupple\Vendor\Database\Database_Connection::instance($db);
 		}
 		$this->_connection = $db;
 
@@ -220,10 +220,10 @@ class Database_Query
 			$db = $this->_connection;
 		}
 
-		if ( ! $db instanceof \Database_Connection)
+		if ( ! $db instanceof \Mits430\Larasupple\Vendor\Database\Database_Connection)
 		{
 			// Get the database instance
-			$db = $this->_connection ?: \Database_Connection::instance($db);
+			$db = $this->_connection ?: \Mits430\Larasupple\Vendor\Database\Database_Connection::instance($db);
 		}
 
 		// Import the SQL locally
@@ -261,7 +261,7 @@ class Database_Query
 		{
 			// Get the database instance. If this query is a instance of
 			// Database_Query_Builder_Select then use the slave connection if configured
-			$db = \Database_Connection::instance($db, null, ! $this instanceof \Database_Query_Builder_Select);
+			$db = \Mits430\Larasupple\Vendor\Database\Database_Connection::instance($db, null, ! $this instanceof \Mits430\Larasupple\Vendor\Database\Database_Query_Builder_Select);
 		}
 
 		// Compile the SQL query
@@ -304,7 +304,7 @@ class Database_Query
 			try
 			{
 				$result = $cache->get();
-				return new \Database_Result_Cached($result, $sql, $this->_as_object);
+				return new \Mits430\Larasupple\Vendor\Database\Database_Result_Cached($result, $sql, $this->_as_object);
 			}
 			catch (\CacheNotFoundException $e) {}
 		}

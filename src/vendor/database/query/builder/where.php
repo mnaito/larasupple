@@ -11,9 +11,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-abstract class Database_Query_Builder_Where extends \Database_Query_Builder
+abstract class Database_Query_Builder_Where extends \Mits430\Larasupple\Vendor\Database\Database_Query_Builder
 {
 	/**
 	 * @var array  $_where  where statements

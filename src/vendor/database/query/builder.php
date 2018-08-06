@@ -11,9 +11,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-abstract class Database_Query_Builder extends \Database_Query
+abstract class Database_Query_Builder extends \Mits430\Larasupple\Vendor\Database\Database_Query
 {
 	/**
 	 * Compiles an array of JOIN statements into an SQL partial.
@@ -23,7 +23,7 @@ abstract class Database_Query_Builder extends \Database_Query
 	 *
 	 * @return  string
 	 */
-	protected function _compile_join(\Database_Connection$db, array $joins)
+	protected function _compile_join(\Mits430\Larasupple\Vendor\Database\Database_Connection$db, array $joins)
 	{
 		$statements = array();
 
@@ -45,7 +45,7 @@ abstract class Database_Query_Builder extends \Database_Query
 	 *
 	 * @return  string
 	 */
-	protected function _compile_conditions(\Database_Connection$db, array $conditions)
+	protected function _compile_conditions(\Mits430\Larasupple\Vendor\Database\Database_Connection$db, array $conditions)
 	{
 		$last_condition = NULL;
 
@@ -156,7 +156,7 @@ abstract class Database_Query_Builder extends \Database_Query
 	 *
 	 * @return  string
 	 */
-	protected function _compile_set(\Database_Connection$db, array $values)
+	protected function _compile_set(\Mits430\Larasupple\Vendor\Database\Database_Connection$db, array $values)
 	{
 		$set = array();
 		foreach ($values as $group)
@@ -187,7 +187,7 @@ abstract class Database_Query_Builder extends \Database_Query
 	 *
 	 * @return  string
 	 */
-	protected function _compile_order_by(\Database_Connection $db, array $columns)
+	protected function _compile_order_by(\Mits430\Larasupple\Vendor\Database\Database_Connection $db, array $columns)
 	{
 		$sort = array();
 

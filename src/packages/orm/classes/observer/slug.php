@@ -157,7 +157,7 @@ class Observer_Slug extends Observer
 			{
 				if ($overwrite === false)
 				{
-					throw new \FuelException('Slug ' . $slug . ' already exists.');
+					throw new \Mits430\Larasupple\Packages\FuelException('Slug ' . $slug . ' already exists.');
 				}
 
 				$max = -1;

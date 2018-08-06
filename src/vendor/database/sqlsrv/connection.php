@@ -12,9 +12,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-class Database_Sqlsrv_Connection extends \Database_PDO_Connection
+class Database_Sqlsrv_Connection extends \Mits430\Larasupple\Vendor\Database\Database_PDO_Connection
 {
 	/**
 	 * Stores the database configuration locally and name the instance.
@@ -29,7 +29,7 @@ class Database_Sqlsrv_Connection extends \Database_PDO_Connection
 		// this driver only works on Windows
 		if (php_uname('s') !== 'Windows')
 		{
-			throw new \Database_Exception('The "SQLSRV" database driver works only on Windows. On *nix, use the "DBLib" driver instead.');
+			throw new \Mits430\Larasupple\Vendor\Database\Database_Exception('The "SQLSRV" database driver works only on Windows. On *nix, use the "DBLib" driver instead.');
 		}
 
 		parent::__construct($name, $config);
@@ -40,7 +40,7 @@ class Database_Sqlsrv_Connection extends \Database_PDO_Connection
 	 *
 	 * @param string $like
 	 *
-	 * @throws \FuelException
+	 * @throws \Mits430\Larasupple\Packages\FuelException
 	 */
 	public function list_tables($like = null)
 	{

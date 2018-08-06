@@ -1,5 +1,4 @@
 <?php
-namespace Supplements\Core;
 
 /**
  * MySQL database connection.
@@ -10,14 +9,14 @@ namespace Supplements\Core;
  * @copyright  (c) 2008-2009 Kohana Team
  * @license    http://kohanaphp.com/license
  */
-namespace Supplements\Core;
+namespace Mits430\Larasupple\Packages\Database;
 
-class Database_Mysql_Connection extends \Fuel\Core\Database_MySQL_Connection
+class Database_Mysql_Connection extends \Mits430\Larasupple\Vendor\Database\Database_MySQL_Connection
 {
 	/**
 	 * connect to database and send initialization SQL
 	 * (non-PHPdoc)
-	 * @see \Fuel\Core\Database_MySQLi_Connection::connect()
+	 * @see \Mits430\Larasupple\Vendor\Database\Database_MySQLi_Connection::connect()
 	 */
 	public function connect()
 	{

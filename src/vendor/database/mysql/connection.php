@@ -11,16 +11,16 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-class Database_MySQL_Connection extends \Database_PDO_Connection
+class Database_MySQL_Connection extends \Mits430\Larasupple\Vendor\Database\Database_PDO_Connection
 {
 	/**
 	 * List tables
 	 *
 	 * @param string $like
 	 *
-	 * @throws \FuelException
+	 * @throws \Mits430\Larasupple\Packages\FuelException
 	 */
 	public function list_tables($like = null)
 	{

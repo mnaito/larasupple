@@ -11,9 +11,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Supplements\Core;
+namespace Mits430\Larasupple\Packages\Database;
 
-abstract class Database_Connection extends \Fuel\Core\Database_Connection
+abstract class Database_Connection extends \Mits430\Larasupple\Vendor\Database\Database_Connection
 {
 	/**
 	 * Quote a database identifier, such as a column name. Adds the

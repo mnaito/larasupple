@@ -11,7 +11,7 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
 abstract class Database_Connection
 {
@@ -42,42 +42,35 @@ abstract class Database_Connection
 	 *
 	 * @return  Database_Connection
 	 *
-	 * @throws \FuelException
+	 * @throws \Mits430\Larasupple\Packages\FuelException
 	 */
 	public static function instance($name = null, array $config = null, $writable = true)
 	{
-		\Config::load('db', true);
-		if ($name === null)
-		{
-			// Use the default instance name
-			$name = \Config::get('db.active');
-		}
+		$name = env("DB_CONNECTION");
+		
+		// Set the driver class name
+		$driver = '\\Mits430\\Larasupple\\Packages\\Database\\Database_' . ucfirst($name) . '_Connection';
 
-		if ( ! $writable and ($readonly = \Config::get('db.'.$name.'.readonly', false)))
-		{
-			! isset(static::$_readonly[$name]) and static::$_readonly[$name] = \Arr::get($readonly, array_rand($readonly));
-			$name = static::$_readonly[$name];
-		}
-
-		if ( ! isset(static::$instances[$name]))
-		{
-			if ($config === null)
-			{
-				// Load the configuration for this database
-				$config = \Config::get('db.'.$name);
-			}
-
-			if ( ! isset($config['type']))
-			{
-				throw new \FuelException('Database type not defined in "'.$name.'" configuration or "'.$name.'" configuration does not exist');
-			}
-
-			// Set the driver class name
-			$driver = '\\Database_' . ucfirst($config['type']) . '_Connection';
-
-			// Create the database connection instance
-			new $driver($name, $config);
-		}
+		$config = [
+			'type' => $name,
+			'connection'  => array(
+				'hostname'   => env("DB_HOST"),
+				'port'   => "3306",
+				'username'   => env("DB_USERNAME"),
+				'password'   => env("DB_PASSWORD"),
+				'database'   => env("DB_DATABASE"),
+				'identifier'   => "`",
+				'table_prefix'   => "",
+				'charset'   => "utf8",
+				'collation'   => false,
+				'enable_cache'   => true,
+				'profiling'   => true,
+				'readonly'   => false,
+			),
+		];
+		
+		// Create the database connection instance
+		new $driver($name, $config);
 
 		return static::$instances[$name];
 	}
@@ -144,7 +137,7 @@ abstract class Database_Connection
 		// Set up a generic schema processor if needed
 		if ( ! $this->_schema)
 		{
-			$this->_schema = new \Database_Schema($name, $this);
+			$this->_schema = new \Mits430\Larasupple\Vendor\Database\Database_Schema($name, $this);
 		}
 
 		// Store the database instance
@@ -245,7 +238,7 @@ abstract class Database_Connection
 	 */
 	public function select(array $args = null)
 	{
-		$instance = new \Database_Query_Builder_Select($args);
+		$instance = new \Mits430\Larasupple\Vendor\Database\Database_Query_Builder_Select($args);
 		return $instance->set_connection($this);
 	}
 
@@ -261,7 +254,7 @@ abstract class Database_Connection
 	 */
 	public function insert($table = null, array $columns = null)
 	{
-		$instance = new \Database_Query_Builder_Insert($table, $columns);
+		$instance = new \Mits430\Larasupple\Vendor\Database\Database_Query_Builder_Insert($table, $columns);
 		return $instance->set_connection($this);
 	}
 
@@ -276,7 +269,7 @@ abstract class Database_Connection
 	 */
 	public function update($table = null)
 	{
-		$instance = new \Database_Query_Builder_Update($table);
+		$instance = new \Mits430\Larasupple\Vendor\Database\Database_Query_Builder_Update($table);
 		return $instance->set_connection($this);
 	}
 
@@ -291,7 +284,7 @@ abstract class Database_Connection
 	 */
 	public function delete($table = null)
 	{
-		$instance = new \Database_Query_Builder_Delete($table);
+		$instance = new \Mits430\Larasupple\Vendor\Database\Database_Query_Builder_Delete($table);
 		return $instance->set_connection($this);
 	}
 
@@ -374,7 +367,7 @@ abstract class Database_Connection
 			$this->_config['enable_cache'] = $bool;
 			return $this;
 		}
-		return \Arr::get($this->_config, 'enable_cache', true);
+		return \Mits430\Larasupple\Packages\Arr::get($this->_config, 'enable_cache', true);
 	}
 
 	/**

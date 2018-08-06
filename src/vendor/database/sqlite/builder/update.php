@@ -11,9 +11,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-class Database_SQLite_Builder_Update extends \Database_Query_Builder_Update
+class Database_SQLite_Builder_Update extends \Mits430\Larasupple\Vendor\Database\Database_Query_Builder_Update
 {
 	/**
 	 * Compile the SQL query and return it.
@@ -24,10 +24,10 @@ class Database_SQLite_Builder_Update extends \Database_Query_Builder_Update
 	 */
 	public function compile($db = null)
 	{
-		if ( ! $db instanceof \Database_Connection)
+		if ( ! $db instanceof \Mits430\Larasupple\Vendor\Database\Database_Connection)
 		{
 			// Get the database instance
-			$db = \Database_Connection::instance($db);
+			$db = \Mits430\Larasupple\Vendor\Database\Database_Connection::instance($db);
 		}
 
 		// Start an update query

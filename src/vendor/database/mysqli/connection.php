@@ -11,9 +11,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-class Database_MySQLi_Connection extends \Database_Connection
+class Database_MySQLi_Connection extends \Mits430\Larasupple\Vendor\Database\Database_Connection
 {
 	/**
 	 * @var  \MySQLi  Raw server connection
@@ -119,7 +119,7 @@ class Database_MySQLi_Connection extends \Database_Connection
 			if ($this->_connection->error)
 			{
 				// Unable to connect, select database, etc
-				throw new \Database_Exception(str_replace($password, str_repeat('*', 10), $this->_connection->error), $this->_connection->errno);
+				throw new \Mits430\Larasupple\Vendor\Database\Database_Exception(str_replace($password, str_repeat('*', 10), $this->_connection->error), $this->_connection->errno);
 			}
 		}
 		catch (\ErrorException $e)
@@ -128,7 +128,7 @@ class Database_MySQLi_Connection extends \Database_Connection
 			$this->_connection = null;
 
 			$error_code = is_numeric($e->getCode()) ? $e->getCode() : 0;
-			throw new \Database_Exception(str_replace($password, str_repeat('*', 10), $e->getMessage()), $error_code, $e);
+			throw new \Mits430\Larasupple\Vendor\Database\Database_Exception(str_replace($password, str_repeat('*', 10), $e->getMessage()), $error_code, $e);
 		}
 
 		// \xFF is a better delimiter, but the PHP driver uses underscore
@@ -156,7 +156,7 @@ class Database_MySQLi_Connection extends \Database_Connection
 			if ($this->_connection->select_db($database) !== true)
 			{
 				// Unable to select database
-				throw new \Database_Exception($this->_connection->error, $this->_connection->errno);
+				throw new \Mits430\Larasupple\Vendor\Database\Database_Exception($this->_connection->error, $this->_connection->errno);
 			}
 		}
 
@@ -205,7 +205,7 @@ class Database_MySQLi_Connection extends \Database_Connection
 
 		if ($status === false)
 		{
-			throw new \Database_Exception($this->_connection->error, $this->_connection->errno);
+			throw new \Mits430\Larasupple\Vendor\Database\Database_Exception($this->_connection->error, $this->_connection->errno);
 		}
 	}
 
@@ -216,7 +216,7 @@ class Database_MySQLi_Connection extends \Database_Connection
 	 * @param   string  $sql        SQL string
 	 * @param   mixed   $as_object  used when query type is SELECT
 	 *
-	 * @throws  \Database_Exception
+	 * @throws  \Mits430\Larasupple\Vendor\Database\Database_Exception
 	 *
 	 * @return  mixed  when SELECT then return an iterator of results,<br>
 	 *                 when UPDATE then return a list of insert id and rows created,<br>
@@ -230,7 +230,7 @@ class Database_MySQLi_Connection extends \Database_Connection
 			// Make sure the connection is still alive
 			if ( ! $this->_connection->ping())
 			{
-				throw new \Database_Exception($this->_connection->error.' [ '.$sql.' ]', $this->_connection->errno);
+				throw new \Mits430\Larasupple\Vendor\Database\Database_Exception($this->_connection->error.' [ '.$sql.' ]', $this->_connection->errno);
 			}
 		}
 		else
@@ -289,7 +289,7 @@ class Database_MySQLi_Connection extends \Database_Connection
 				\Profiler::delete($benchmark);
 			}
 
-			throw new \Database_Exception($this->_connection->error.' [ '.$sql.' ]', $this->_connection->errno);
+			throw new \Mits430\Larasupple\Vendor\Database\Database_Exception($this->_connection->error.' [ '.$sql.' ]', $this->_connection->errno);
 		}
 
 		// check for multiresults, we don't support those at the moment
@@ -297,7 +297,7 @@ class Database_MySQLi_Connection extends \Database_Connection
 		{
 			if ($more_result = $this->_connection->use_result())
 			{
-				throw new \Database_Exception('The MySQLi driver does not support multiple resultsets', 0);
+				throw new \Mits430\Larasupple\Vendor\Database\Database_Exception('The MySQLi driver does not support multiple resultsets', 0);
 			}
 		}
 
@@ -312,7 +312,7 @@ class Database_MySQLi_Connection extends \Database_Connection
 		if ($type === \DB::SELECT)
 		{
 			// Return an iterator of results
-			return new \Database_MySQLi_Result($result, $sql, $as_object);
+			return new \Mits430\Larasupple\Vendor\Database\Database_MySQLi_Result($result, $sql, $as_object);
 		}
 		elseif ($type === \DB::INSERT)
 		{
@@ -512,7 +512,7 @@ class Database_MySQLi_Connection extends \Database_Connection
 
 		if (($value = $this->_connection->real_escape_string((string) $value)) === false)
 		{
-			throw new \Database_Exception($this->_connection->error, $this->_connection->errno);
+			throw new \Mits430\Larasupple\Vendor\Database\Database_Exception($this->_connection->error, $this->_connection->errno);
 		}
 
 		// SQL standard is to use single-quotes for all values

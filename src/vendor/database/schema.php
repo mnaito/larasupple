@@ -10,7 +10,7 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
 class Database_Schema
 {
@@ -41,7 +41,7 @@ class Database_Schema
 	/**
 	 * Creates a database.  Will throw a Database_Exception if it cannot.
 	 *
-	 * @throws  Fuel\Database_Exception
+	 * @throws  Fuel\Mits430\Larasupple\Vendor\Database\Database_Exception
 	 * @param   string  $database       the database name
 	 * @param   string  $charset        the character set
 	 * @param   boolean $if_not_exists  whether to add an IF NOT EXISTS statement.
@@ -60,7 +60,7 @@ class Database_Schema
 	/**
 	 * Drops a database.  Will throw a Database_Exception if it cannot.
 	 *
-	 * @throws  Fuel\Database_Exception
+	 * @throws  Fuel\Mits430\Larasupple\Vendor\Database\Database_Exception
 	 * @param   string  $database   the database name
 	 * @return  int     the number of affected rows
 	 */
@@ -75,7 +75,7 @@ class Database_Schema
 	/**
 	 * Drops a table.  Will throw a Database_Exception if it cannot.
 	 *
-	 * @throws  Fuel\Database_Exception
+	 * @throws  Fuel\Mits430\Larasupple\Vendor\Database\Database_Exception
 	 * @param   string  $table  the table name
 	 * @return  int     the number of affected rows
 	 */
@@ -90,7 +90,7 @@ class Database_Schema
 	/**
 	 * Renames a table.  Will throw a Database_Exception if it cannot.
 	 *
-	 * @throws  \Database_Exception
+	 * @throws  \Mits430\Larasupple\Vendor\Database\Database_Exception
 	 * @param   string  $table          the old table name
 	 * @param   string  $new_table_name the new table name
 	 * @return  int     the number of affected
@@ -108,7 +108,7 @@ class Database_Schema
 	/**
 	 * Creates a table.
 	 *
-	 * @throws  \Database_Exception
+	 * @throws  \Mits430\Larasupple\Vendor\Database\Database_Exception
 	 * @param   string          $table          the table name
 	 * @param   array           $fields         the fields array
 	 * @param   array           $primary_keys   an array of primary keys
@@ -147,7 +147,7 @@ class Database_Schema
 	/**
 	 * Truncates a table.
 	 *
-	 * @throws  Fuel\Database_Exception
+	 * @throws  Fuel\Mits430\Larasupple\Vendor\Database\Database_Exception
 	 * @param   string  $table  the table name
 	 * @return  int     the number of affected rows
 	 */
@@ -162,7 +162,7 @@ class Database_Schema
 	/**
 	 * Generic check if a given table exists.
 	 *
-	 * @throws  \Database_Exception
+	 * @throws  \Mits430\Larasupple\Vendor\Database\Database_Exception
 	 * @param   string  $table  Table name
 	 * @return  bool
 	 */
@@ -177,7 +177,7 @@ class Database_Schema
 			$this->_connection->query(\DB::SELECT, $sql, false);
 			return true;
 		}
-		catch (\Database_Exception $e)
+		catch (\Mits430\Larasupple\Vendor\Database\Database_Exception $e)
 		{
 			// check if we have a DB connection at all
 			if ( ! $this->_connection->has_connection())
@@ -193,7 +193,7 @@ class Database_Schema
 	/**
 	 * Checks if given field(s) in a given table exists.
 	 *
-	 * @throws  \Database_Exception
+	 * @throws  \Mits430\Larasupple\Vendor\Database\Database_Exception
 	 * @param   string          $table      Table name
 	 * @param   string|array    $columns    columns to check
 	 * @return  bool
@@ -216,7 +216,7 @@ class Database_Schema
 			$this->_connection->query(\DB::SELECT, $sql, false);
 			return true;
 		}
-		catch (\Database_Exception $e)
+		catch (\Mits430\Larasupple\Vendor\Database\Database_Exception $e)
 		{
 			// check if we have a DB connection at all
 			if ( ! $this->_connection->has_connection())
@@ -392,7 +392,7 @@ class Database_Schema
 	/**
 	 * Returns string of foreign keys
 	 *
-	 * @throws  \Database_Exception
+	 * @throws  \Mits430\Larasupple\Vendor\Database\Database_Exception
 	 * @param   array   $foreign_keys  Array of foreign key rules
 	 * @return  string  the formatted foreign key string
 	 */
@@ -400,7 +400,7 @@ class Database_Schema
 	{
 		if ( ! is_array($foreign_keys))
 		{
-			throw new \Database_Exception('Foreign keys on create_table() must be specified as an array');
+			throw new \Mits430\Larasupple\Vendor\Database\Database_Exception('Foreign keys on create_table() must be specified as an array');
 		}
 
 		$fk_list = array();
@@ -410,15 +410,15 @@ class Database_Schema
 			// some sanity checks
 			if (empty($definition['key']))
 			{
-				throw new \Database_Exception('Foreign keys on create_table() must specify a foreign key name');
+				throw new \Mits430\Larasupple\Vendor\Database\Database_Exception('Foreign keys on create_table() must specify a foreign key name');
 			}
 			if ( empty($definition['reference']))
 			{
-				throw new \Database_Exception('Foreign keys on create_table() must specify a foreign key reference');
+				throw new \Mits430\Larasupple\Vendor\Database\Database_Exception('Foreign keys on create_table() must specify a foreign key reference');
 			}
 			if (empty($definition['reference']['table']) or empty($definition['reference']['column']))
 			{
-				throw new \Database_Exception('Foreign keys on create_table() must specify a reference table and column name');
+				throw new \Mits430\Larasupple\Vendor\Database\Database_Exception('Foreign keys on create_table() must specify a reference table and column name');
 			}
 
 			$sql = '';
@@ -504,7 +504,7 @@ class Database_Schema
 		}
 		else
 		{
-			$type = \Fuel::L_INFO;
+			$type = \Mits430\Larasupple\Packages\Fuel::L_INFO;
 		}
 
 		logger($type, 'Table: '.$table.', Operation: '.$operation.', Message: '.$result->get('Msg_text'), 'DBUtil::table_maintenance');
@@ -602,7 +602,7 @@ class Database_Schema
 
 			if(array_key_exists('DEFAULT', $attr))
 			{
-				$sql .= ' DEFAULT '.(($attr['DEFAULT'] instanceof \Database_Expression) ? $attr['DEFAULT']  : $this->_connection->quote($attr['DEFAULT']));
+				$sql .= ' DEFAULT '.(($attr['DEFAULT'] instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression) ? $attr['DEFAULT']  : $this->_connection->quote($attr['DEFAULT']));
 			}
 
 			if(array_key_exists('NULL', $attr) and $attr['NULL'] === true)

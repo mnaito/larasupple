@@ -11,9 +11,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-abstract class Database_Result implements \Countable, \Iterator, \SeekableIterator, \ArrayAccess, \Sanitization
+abstract class Database_Result implements \Countable, \Iterator, \SeekableIterator, \ArrayAccess, \Mits430\Larasupple\Packages\Sanitization
 {
 	/**
 	 * @var  string Executed SQL for this result
@@ -87,7 +87,7 @@ abstract class Database_Result implements \Countable, \Iterator, \SeekableIterat
 	 */
 	public function cached()
 	{
-		return new \Database_Result_Cached($this->as_array(), $this->_query, $this->_as_object);
+		return new \Mits430\Larasupple\Vendor\Database\Database_Result_Cached($this->as_array(), $this->_query, $this->_as_object);
 	}
 
 	/**
@@ -298,11 +298,11 @@ abstract class Database_Result implements \Countable, \Iterator, \SeekableIterat
 	 * @param integer $offset
 	 * @param mixed   $value
 	 *
-	 * @throws  \FuelException
+	 * @throws  \Mits430\Larasupple\Packages\FuelException
 	 */
 	final public function offsetSet($offset, $value)
 	{
-		throw new \FuelException('Database results are read-only');
+		throw new \Mits430\Larasupple\Packages\FuelException('Database results are read-only');
 	}
 
 	/**
@@ -311,11 +311,11 @@ abstract class Database_Result implements \Countable, \Iterator, \SeekableIterat
 	 *
 	 * @param integer $offset
 	 *
-	 * @throws  \FuelException
+	 * @throws  \Mits430\Larasupple\Packages\FuelException
 	 */
 	final public function offsetUnset($offset)
 	{
-		throw new \FuelException('Database results are read-only');
+		throw new \Mits430\Larasupple\Packages\FuelException('Database results are read-only');
 	}
 
 	/**

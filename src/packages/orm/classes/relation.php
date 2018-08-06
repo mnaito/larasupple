@@ -141,14 +141,14 @@ abstract class Relation
 	 * Allow outside access to protected properties
 	 *
 	 * @param  $property
-	 * @throws \FuelException Invalid relation property
+	 * @throws \Mits430\Larasupple\Packages\FuelException Invalid relation property
 	 * @return
 	 */
 	public function __get($property)
 	{
 		if (strncmp($property, '_', 1) == 0 or ! property_exists($this, $property))
 		{
-			throw new \FuelException('Invalid relation property: '.$property);
+			throw new \Mits430\Larasupple\Packages\FuelException('Invalid relation property: '.$property);
 		}
 
 		return $this->{$property};

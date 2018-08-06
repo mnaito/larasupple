@@ -105,7 +105,7 @@ class Model_Soft extends Model
 	public static function get_filter_status()
 	{
 		$class = get_called_class();
-		return \Arr::get(static::$_disable_filter, $class, true);
+		return \Mits430\Larasupple\Packages\Arr::get(static::$_disable_filter, $class, true);
 	}
 
 	/**
@@ -127,7 +127,7 @@ class Model_Soft extends Model
 			static::soft_delete_properties();
 		}
 
-		return \Arr::get(static::$_soft_delete_cached[$class], $key, $default);
+		return \Mits430\Larasupple\Packages\Arr::get(static::$_soft_delete_cached[$class], $key, $default);
 	}
 
 	/**

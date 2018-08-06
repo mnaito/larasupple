@@ -11,9 +11,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Supplements\Core;
+namespace Mits430\Larasupple\Packages\Database;
 
-class Database_Query_Builder_Update extends \Fuel\Core\Database_Query_Builder_Update
+class Database_Query_Builder_Update extends \Mits430\Larasupple\Vendor\Database\Database_Query_Builder_Update
 {
 	/**
 	 * Compile the SQL query and return it.

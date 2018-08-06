@@ -11,9 +11,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-class Database_Query_Builder_Update extends \Database_Query_Builder_Where
+class Database_Query_Builder_Update extends \Mits430\Larasupple\Vendor\Database\Database_Query_Builder_Where
 {
 	/**
 	 * @var string  $_table  table name
@@ -109,10 +109,10 @@ class Database_Query_Builder_Update extends \Database_Query_Builder_Where
 	 */
 	public function compile($db = null)
 	{
-		if ( ! $db instanceof \Database_Connection)
+		if ( ! $db instanceof \Mits430\Larasupple\Vendor\Database\Database_Connection)
 		{
 			// Get the database instance
-			$db = \Database_Connection::instance($db);
+			$db = \Mits430\Larasupple\Vendor\Database\Database_Connection::instance($db);
 		}
 
 		// Start an update query
@@ -177,7 +177,7 @@ class Database_Query_Builder_Update extends \Database_Query_Builder_Where
 	 */
 	public function join($table, $type = null)
 	{
-		$this->_join[] = $this->_last_join = new \Database_Query_Builder_Join($table, $type);
+		$this->_join[] = $this->_last_join = new \Mits430\Larasupple\Vendor\Database\Database_Query_Builder_Join($table, $type);
 
 		return $this;
 	}

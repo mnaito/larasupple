@@ -12,9 +12,9 @@
  *
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-class Database_PDO_Connection extends \Database_Connection
+class Database_PDO_Connection extends \Mits430\Larasupple\Vendor\Database\Database_Connection
 {
 	/**
 	 * @var  \PDO  $_connection  raw server connection
@@ -33,7 +33,7 @@ class Database_PDO_Connection extends \Database_Connection
 	protected function __construct($name, array $config)
 	{
 		// construct a custom schema driver
-//		$this->_schema = new \Database_Drivername_Schema($name, $this);
+//		$this->_schema = new \Mits430\Larasupple\Vendor\Database\Database_Drivername_Schema($name, $this);
 
 		// call the parent consructor
 		parent::__construct($name, $config);
@@ -48,7 +48,7 @@ class Database_PDO_Connection extends \Database_Connection
 	/**
 	 * Connects to the database
 	 *
-	 * @throws \Database_Exception
+	 * @throws \Mits430\Larasupple\Vendor\Database\Database_Exception
 	 */
 	public function connect()
 	{
@@ -109,7 +109,7 @@ class Database_PDO_Connection extends \Database_Connection
 					$error_code = 0;
 				}
 			}
-			throw new \Database_Exception(str_replace($this->_config['connection']['password'], str_repeat('*', 10), $e->getMessage()), $error_code, $e);
+			throw new \Mits430\Larasupple\Vendor\Database\Database_Exception(str_replace($this->_config['connection']['password'], str_repeat('*', 10), $e->getMessage()), $error_code, $e);
 		}
 	}
 
@@ -166,7 +166,7 @@ class Database_PDO_Connection extends \Database_Connection
 	 *
 	 * @return mixed
 	 *
-	 * @throws \Database_Exception
+	 * @throws \Mits430\Larasupple\Vendor\Database\Database_Exception
 	 */
 	public function query($type, $sql, $as_object)
 	{
@@ -250,7 +250,7 @@ class Database_PDO_Connection extends \Database_Connection
 							}
 						}
 
-						throw new \Database_Exception($e->getMessage().' with query: "'.$sql.'"', $error_code, $e);
+						throw new \Mits430\Larasupple\Vendor\Database\Database_Exception($e->getMessage().' with query: "'.$sql.'"', $error_code, $e);
 					}
 				}
 
@@ -270,7 +270,7 @@ class Database_PDO_Connection extends \Database_Connection
 							$error_code = 0;
 						}
 					}
-					throw new \Database_Exception($e->getMessage().' with query: "'.$sql.'"', $error_code, $e);
+					throw new \Mits430\Larasupple\Vendor\Database\Database_Exception($e->getMessage().' with query: "'.$sql.'"', $error_code, $e);
 				}
 			}
 		}
@@ -301,7 +301,7 @@ class Database_PDO_Connection extends \Database_Connection
 			}
 
 			// Return an iterator of results
-			return new \Database_Result_Cached($result, $sql, $as_object);
+			return new \Mits430\Larasupple\Vendor\Database\Database_Result_Cached($result, $sql, $as_object);
 		}
 		elseif ($type === \DB::INSERT)
 		{
@@ -325,11 +325,11 @@ class Database_PDO_Connection extends \Database_Connection
 	 *
 	 * @param string $like
 	 *
-	 * @throws \FuelException
+	 * @throws \Mits430\Larasupple\Packages\FuelException
 	 */
 	public function list_tables($like = null)
 	{
-		throw new \FuelException('Database method '.__METHOD__.' is not supported by '.__CLASS__);
+		throw new \Mits430\Larasupple\Packages\FuelException('Database method '.__METHOD__.' is not supported by '.__CLASS__);
 	}
 
 	/**

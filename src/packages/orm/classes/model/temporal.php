@@ -87,11 +87,11 @@ class Model_Temporal extends Model
 		{
 			//Load up the info
 			$properties['start_column'] =
-				\Arr::get(static::$_temporal, 'start_column', 'temporal_start');
+				\Mits430\Larasupple\Packages\Arr::get(static::$_temporal, 'start_column', 'temporal_start');
 			$properties['end_column'] =
-				\Arr::get(static::$_temporal, 'end_column', 'temporal_end');
+				\Mits430\Larasupple\Packages\Arr::get(static::$_temporal, 'end_column', 'temporal_end');
 			$properties['mysql_timestamp'] =
-				\Arr::get(static::$_temporal, 'mysql_timestamp', false);
+				\Mits430\Larasupple\Packages\Arr::get(static::$_temporal, 'mysql_timestamp', false);
 
 			$properties['max_timestamp'] = ($properties['mysql_timestamp']) ?
 				\Config::get('orm.sql_max_timestamp_mysql') :
@@ -123,7 +123,7 @@ class Model_Temporal extends Model
 			static::temporal_properties();
 		}
 
-		return \Arr::get(static::$_temporal_cached[$class], $key, $default);
+		return \Mits430\Larasupple\Packages\Arr::get(static::$_temporal_cached[$class], $key, $default);
 	}
 
 	/**
@@ -237,7 +237,7 @@ class Model_Temporal extends Model
 
 		//Check if we need to add filtering
 		$class = get_called_class();
-		$timestamp = \Arr::get(static::$_lazy_filtered_classes, $class, null);
+		$timestamp = \Mits430\Larasupple\Packages\Arr::get(static::$_lazy_filtered_classes, $class, null);
 
 		if( ! is_null($timestamp))
 		{
@@ -643,7 +643,7 @@ class Model_Temporal extends Model
 	private static function get_primary_key_status()
 	{
 		$class = get_called_class();
-		return \Arr::get(self::$_pk_check_disabled, $class, true);
+		return \Mits430\Larasupple\Packages\Arr::get(self::$_pk_check_disabled, $class, true);
 	}
 
 	/**
@@ -652,7 +652,7 @@ class Model_Temporal extends Model
 	private static function get_primary_key_id_only_status()
 	{
 		$class = get_called_class();
-		return \Arr::get(self::$_pk_id_only, $class, false);
+		return \Mits430\Larasupple\Packages\Arr::get(self::$_pk_id_only, $class, false);
 	}
 
 	/**

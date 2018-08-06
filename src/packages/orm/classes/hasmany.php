@@ -36,7 +36,7 @@ class HasMany extends Relation
 
 		if ( ! class_exists($this->model_to))
 		{
-			throw new \FuelException('Related model not found by Has_Many relation "'.$this->name.'": '.$this->model_to);
+			throw new \Mits430\Larasupple\Packages\FuelException('Related model not found by Has_Many relation "'.$this->name.'": '.$this->model_to);
 		}
 		$this->model_to = get_real_class($this->model_to);
 	}
@@ -56,15 +56,15 @@ class HasMany extends Relation
 			next($this->key_to);
 		}
 
-		$conditions = \Arr::merge($this->conditions, $conditions);
+		$conditions = \Mits430\Larasupple\Packages\Arr::merge($this->conditions, $conditions);
 
-		foreach (\Arr::get($conditions, 'where', array()) as $key => $condition)
+		foreach (\Mits430\Larasupple\Packages\Arr::get($conditions, 'where', array()) as $key => $condition)
 		{
 			is_array($condition) or $condition = array($key, '=', $condition);
 			$query->where($condition);
 		}
 
-		foreach (\Arr::get($conditions, 'order_by', array()) as $field => $direction)
+		foreach (\Mits430\Larasupple\Packages\Arr::get($conditions, 'order_by', array()) as $field => $direction)
 		{
 			if (is_numeric($field))
 			{
@@ -87,13 +87,13 @@ class HasMany extends Relation
 			'connection'   => call_user_func(array($this->model_to, 'connection')),
 			'table'        => array(call_user_func(array($this->model_to, 'table')), $alias_to),
 			'primary_key'  => call_user_func(array($this->model_to, 'primary_key')),
-			'join_type'    => \Arr::get($conditions, 'join_type') ?: \Arr::get($this->conditions, 'join_type', 'left'),
+			'join_type'    => \Mits430\Larasupple\Packages\Arr::get($conditions, 'join_type') ?: \Mits430\Larasupple\Packages\Arr::get($this->conditions, 'join_type', 'left'),
 			'join_on'      => array(),
 			'columns'      => $this->select($alias_to),
 			'rel_name'     => strpos($rel_name, '.') ? substr($rel_name, strrpos($rel_name, '.') + 1) : $rel_name,
 			'relation'     => $this,
-			'where'        => \Arr::get($conditions, 'where', array()),
-			'order_by'     => \Arr::get($conditions, 'order_by') ?: \Arr::get($this->conditions, 'order_by', array()),
+			'where'        => \Mits430\Larasupple\Packages\Arr::get($conditions, 'where', array()),
+			'order_by'     => \Mits430\Larasupple\Packages\Arr::get($conditions, 'order_by') ?: \Mits430\Larasupple\Packages\Arr::get($this->conditions, 'order_by', array()),
 		);
 
 		reset($this->key_to);
@@ -102,12 +102,12 @@ class HasMany extends Relation
 			$model['join_on'][] = array($alias_from.'.'.$key, '=', $alias_to.'.'.current($this->key_to));
 			next($this->key_to);
 		}
-		foreach (array(\Arr::get($this->conditions, 'where', array()), \Arr::get($conditions, 'join_on', array())) as $c)
+		foreach (array(\Mits430\Larasupple\Packages\Arr::get($this->conditions, 'where', array()), \Mits430\Larasupple\Packages\Arr::get($conditions, 'join_on', array())) as $c)
 		{
 			foreach ($c as $key => $condition)
 			{
 				! is_array($condition) and $condition = array($key, '=', $condition);
-				if ( ! $condition[0] instanceof \Fuel\Core\Database_Expression and strpos($condition[0], '.') === false)
+				if ( ! $condition[0] instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression and strpos($condition[0], '.') === false)
 				{
 					$condition[0] = $alias_to.'.'.$condition[0];
 				}
@@ -129,7 +129,7 @@ class HasMany extends Relation
 
 		if ( ! is_array($models_to) and ($models_to = is_null($models_to) ? array() : $models_to) !== array())
 		{
-			throw new \FuelException('Assigned relationships must be an array or null, given relationship value for '.
+			throw new \Mits430\Larasupple\Packages\FuelException('Assigned relationships must be an array or null, given relationship value for '.
 				$this->name.' is invalid.');
 		}
 		$original_model_ids === null and $original_model_ids = array();
@@ -138,7 +138,7 @@ class HasMany extends Relation
 		{
 			if ( ! $model_to instanceof $this->model_to)
 			{
-				throw new \FuelException('Invalid Model instance added to relations in this model.');
+				throw new \Mits430\Larasupple\Packages\FuelException('Invalid Model instance added to relations in this model.');
 			}
 
 			$current_model_id = ($model_to and ! $model_to->is_new()) ? $model_to->implode_pk($model_to) : null;

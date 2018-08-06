@@ -218,7 +218,7 @@ class Query
 	 * @param bool          $add_pks    Whether or not to add the Primary Keys to the list of selected columns
 	 * @param string|array  $fields     Optionally. Which field/fields must be retrieved
 	 *
-	 * @throws \FuelException No properties found in model
+	 * @throws \Mits430\Larasupple\Packages\FuelException No properties found in model
 	 *
 	 * @return  void|array
 	 */
@@ -234,7 +234,7 @@ class Query
 
 				if (empty($fields))
 				{
-					throw new \FuelException('No properties found in model.');
+					throw new \Mits430\Larasupple\Packages\FuelException('No properties found in model.');
 				}
 				foreach ($fields as $field)
 				{
@@ -299,7 +299,7 @@ class Query
 		$select = array();
 
 		// for BC reasons, deal with the odd array(DB::expr, 'name') syntax first
-		if (($value = reset($fields)) instanceOf \Fuel\Core\Database_Expression and is_string($index = next($fields)))
+		if (($value = reset($fields)) instanceOf \Mits430\Larasupple\Vendor\Database\Database_Expression and is_string($index = next($fields)))
 		{
 			$select[$this->alias.'_c'.$i++] = $fields;
 		}
@@ -342,7 +342,7 @@ class Query
 				}
 
 				// DB::expr() passed?
-				elseif ($value instanceOf \Fuel\Core\Database_Expression)
+				elseif ($value instanceOf \Mits430\Larasupple\Vendor\Database\Database_Expression)
 				{
 					// no column name given for the result?
 					if (is_numeric($index))
@@ -501,7 +501,7 @@ class Query
 	 * @param   array   $condition
 	 * @param   string  $type
 	 *
-	 * @throws \FuelException
+	 * @throws \Mits430\Larasupple\Packages\FuelException
 	 *
 	 * @return  $this
 	 */
@@ -518,7 +518,7 @@ class Query
 		}
 
 		// prefix table alias when not yet prefixed and not a DB expression object
-		if (strpos($condition[0], '.') === false and ! $condition[0] instanceof \Fuel\Core\Database_Expression)
+		if (strpos($condition[0], '.') === false and ! $condition[0] instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression)
 		{
 			$condition[0] = $this->alias.'.'.$condition[0];
 		}
@@ -527,13 +527,13 @@ class Query
 		{
 			$this->where[] = array($type, array($condition[0], '=', $condition[1]));
 		}
-		elseif (count($condition) == 3 or $condition[0] instanceof \Fuel\Core\Database_Expression)
+		elseif (count($condition) == 3 or $condition[0] instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression)
 		{
 			$this->where[] = array($type, $condition);
 		}
 		else
 		{
-			throw new \FuelException('Invalid param count for where condition.');
+			throw new \Mits430\Larasupple\Packages\FuelException('Invalid param count for where condition.');
 		}
 
 		return $this;
@@ -670,7 +670,7 @@ class Query
 		}
 
 		// prefix table alias when not yet prefixed and not a DB expression object
-		if ( ! $property instanceof \Fuel\Core\Database_Expression and strpos($property, '.') === false)
+		if ( ! $property instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression and strpos($property, '.') === false)
 		{
 			$property = $this->alias.'.'.$property;
 		}
@@ -781,16 +781,16 @@ class Query
 	/**
 	 * Build a select, delete or update query
 	 *
-	 * @param   \Fuel\Core\Database_Query_Builder_Where  DB where() query object
+	 * @param   \Mits430\Larasupple\Vendor\Database;\Database_Query_Builder_Where  DB where() query object
 	 * @param   array $columns  Optionally
 	 * @param   string $type    Type of query to build (count/select/update/delete/insert)
 	 *
-	 * @throws \FuelException            Models cannot be related between different database connections
+	 * @throws \Mits430\Larasupple\Packages\FuelException            Models cannot be related between different database connections
 	 * @throws \UnexpectedValueException Trying to get the relation of an unloaded relation
 	 *
 	 * @return  array          with keys query and relations
 	 */
-	public function build_query(\Fuel\Core\Database_Query_Builder_Where $query, $columns = array(), $type = 'select')
+	public function build_query(\Mits430\Larasupple\Vendor\Database\Database_Query_Builder_Where $query, $columns = array(), $type = 'select')
 	{
 		$read_query = in_array($type, array('select', 'count'));
 
@@ -833,10 +833,10 @@ class Query
 
 				if (empty($conditional)
 					or strpos($conditional[0], $this->alias.'.') === 0
-					or (!$read_query and $conditional[0] instanceof \Fuel\Core\Database_Expression))
+					or (!$read_query and $conditional[0] instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression))
 				{
 					if (!$read_query and ! empty($conditional)
-						and ! $conditional[0] instanceof \Fuel\Core\Database_Expression)
+						and ! $conditional[0] instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression)
 					{
 						$conditional[0] = substr($conditional[0], strlen($this->alias.'.'));
 					}
@@ -853,10 +853,10 @@ class Query
 
 					if (empty($conditional)
 						or strpos($conditional[0], $this->alias.'.') === 0
-						or (!$read_query and $conditional[0] instanceof \Fuel\Core\Database_Expression))
+						or (!$read_query and $conditional[0] instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression))
 					{
 						if (!$read_query and ! empty($conditional)
-							and ! $conditional[0] instanceof \Fuel\Core\Database_Expression)
+							and ! $conditional[0] instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression)
 						{
 							$conditional[0] = substr($conditional[0], strlen($this->alias.'.'));
 						}
@@ -917,7 +917,7 @@ class Query
 			// do we need to add order_by clauses on the subquery?
 			foreach ($this->order_by as $idx => $ob)
 			{
-				if ( ! $ob[0] instanceof \Fuel\Core\Database_Expression)
+				if ( ! $ob[0] instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression)
 				{
 					if (strpos($ob[0], $this->alias.'.') === 0)
 					{
@@ -962,7 +962,7 @@ class Query
 			if (($read_query and $m['connection'] != $this->connection) or
 				(!$read_query and $m['connection'] != $this->write_connection))
 			{
-				throw new \FuelException('Models cannot be related between different database connections.');
+				throw new \Mits430\Larasupple\Packages\FuelException('Models cannot be related between different database connections.');
 			}
 
 			$join_query = $query->join($m['table'], $m['join_type']);
@@ -986,7 +986,7 @@ class Query
 					{
 						$v_dir = is_array($v_ob) ? $v_ob[1] : 'ASC';
 						$v_ob = is_array($v_ob) ? $v_ob[0] : $v_ob;
-						if ( ! $v_ob instanceof \Fuel\Core\Database_Expression and strpos($v_ob, '.') === false)
+						if ( ! $v_ob instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression and strpos($v_ob, '.') === false)
 						{
 							$v_ob = $m_name.'.'.$v_ob;
 						}
@@ -1011,7 +1011,7 @@ class Query
 		{
 			foreach ($order_by as $ob)
 			{
-				if ( ! $ob[0] instanceof \Fuel\Core\Database_Expression)
+				if ( ! $ob[0] instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression)
 				{
 					if (strpos($ob[0], $this->alias.'.') === 0)
 					{
@@ -1038,7 +1038,7 @@ class Query
 		{
 			foreach ($this->group_by as $gb)
 			{
-				if ( ! $gb instanceof \Fuel\Core\Database_Expression)
+				if ( ! $gb instanceof \Mits430\Larasupple\Vendor\Database\Database_Expression)
 				{
 					if (strpos($gb, $this->alias.'.') === false)
 					{
@@ -1164,7 +1164,7 @@ class Query
 			$obj = array();
 			foreach ($select as $s)
 			{
-				if ($s[0] instanceOf \Fuel\Core\Database_Expression)
+				if ($s[0] instanceOf \Mits430\Larasupple\Vendor\Database\Database_Expression)
 				{
 					$f = isset($this->select[$s[1]][1]) ? $this->select[$s[1]][1] : $s[1];
 				}
@@ -1397,7 +1397,7 @@ class Query
 	 */
 	public function count($column = null, $distinct = true)
 	{
-		$select = $column ?: \Arr::get(call_user_func($this->model.'::primary_key'), 0);
+		$select = $column ?: \Mits430\Larasupple\Packages\Arr::get(call_user_func($this->model.'::primary_key'), 0);
 		$select = (strpos($select, '.') === false ? $this->alias.'.'.$select : $select);
 
 		// Get the columns

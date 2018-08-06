@@ -11,6 +11,6 @@
  * @link       http://fuelphp.com
  */
 
-namespace Fuel\Core;
+namespace Mits430\Larasupple\Vendor\Database;
 
-class Database_Exception extends \FuelException {}
+class Database_Exception extends \Mits430\Larasupple\Packages\FuelException {}

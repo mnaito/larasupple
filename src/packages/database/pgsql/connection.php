@@ -11,7 +11,7 @@
  * @license    http://kohanaphp.com/license
  */
 
-namespace Supplements\Core;
+namespace Mits430\Larasupple\Packages\Database;
 
 
 
