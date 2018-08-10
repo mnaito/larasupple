@@ -12,7 +12,7 @@
  * @link       http://fuelphp.com
  */
 
-namespace Orm;
+namespace Mits430\Larasupple\Packages\Orm;
 
 /**
  * Record Not Found Exception
@@ -24,7 +24,7 @@ class RecordNotFound extends \OutOfBoundsException {}
  */
 class FrozenObject extends \RuntimeException {}
 
-class Model implements \Mits430\Larasupple\Packages\ArrayAccess, \Iterator, \Mits430\Larasupple\Packages\Sanitization
+class Model implements \ArrayAccess, \Iterator, \Mits430\Larasupple\Packages\Sanitization
 {
 	/* ---------------------------------------------------------------------------
 	 * Static usage
@@ -197,7 +197,7 @@ class Model implements \Mits430\Larasupple\Packages\ArrayAccess, \Iterator, \Mit
 			}
 			else
 			{
-				static::$_table_names_cached[$class] = \Inflector::tableize($class);
+				static::$_table_names_cached[$class] = \Mits430\Larasupple\Vendor\Inflector::tableize($class);
 			}
 		}
 
@@ -1661,7 +1661,7 @@ class Model implements \Mits430\Larasupple\Packages\ArrayAccess, \Iterator, \Mit
 			{
 				if ( ! class_exists($observer))
 				{
-					$observer_class = \Inflector::get_namespace($observer).'Observer_'.\Inflector::denamespace($observer);
+					$observer_class = \Mits430\Larasupple\Vendor\Inflector::get_namespace($observer).'Observer_'.\Mits430\Larasupple\Vendor\Inflector::denamespace($observer);
 					if ( ! class_exists($observer_class))
 					{
 						throw new \UnexpectedValueException($observer);
@@ -2023,7 +2023,7 @@ class Model implements \Mits430\Larasupple\Packages\ArrayAccess, \Iterator, \Mit
 	 * @param bool $recurse
 	 * @param bool $eav
 	 *
-	 * @internal param \Orm\whether $bool or not to include the custom data array
+	 * @internal param \\Mits430\Larasupple\Packages\Orm\whether $bool or not to include the custom data array
 	 *
 	 * @return  array
 	 */
@@ -2199,7 +2199,7 @@ class Model implements \Mits430\Larasupple\Packages\ArrayAccess, \Iterator, \Mit
 				}
 
 				// EAV containers must be of the "Many type"
-				if ($rel instanceOf \Orm\HasOne or $rel instanceOf \Orm\BelongsTo )
+				if ($rel instanceOf \Mits430\Larasupple\Packages\Orm\HasOne or $rel instanceOf \Mits430\Larasupple\Packages\Orm\BelongsTo )
 				{
 					throw new \OutOfBoundsException('EAV containers can only be defined on "HasMany" or "ManyMany" relations in '.get_class($this).'.');
 				}
@@ -2273,7 +2273,7 @@ class Model implements \Mits430\Larasupple\Packages\ArrayAccess, \Iterator, \Mit
 				}
 
 				// EAV containers must be of the "Many type"
-				if ($relation instanceOf \Orm\HasOne or $relation instanceOf \Orm\BelongsTo)
+				if ($relation instanceOf \Mits430\Larasupple\Packages\Orm\HasOne or $relation instanceOf \Mits430\Larasupple\Packages\Orm\BelongsTo)
 				{
 					throw new \OutOfBoundsException('EAV containers can only be defined on "HasMany" or "ManyMany" relations in '.get_class($this).'.');
 				}

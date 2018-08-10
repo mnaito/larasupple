@@ -12,7 +12,7 @@
  * @link       http://fuelphp.com
  */
 
-namespace Orm;
+namespace Mits430\Larasupple\Packages\Orm;
 
 class RelationNotSoft extends \Exception
 {
@@ -23,7 +23,7 @@ class RelationNotSoft extends \Exception
  * that the data has been deleted but the data itself is not removed from the
  * database.
  *
- * @package Orm
+ * @package \Mits430\Larasupple\Packages\Orm
  * @author  Fuel Development Team
  */
 class Model_Soft extends Model
@@ -194,7 +194,7 @@ class Model_Soft extends Model
 	protected function should_cascade_delete($rel)
 	{
 		// Because temporal includes soft delete functionality it can be deleted too
-		if ( ! is_subclass_of($rel->model_to, 'Orm\Model_Soft') && ! is_subclass_of($rel->model_to, 'Orm\Model_Temporal'))
+		if ( ! is_subclass_of($rel->model_to, '\Mits430\Larasupple\Packages\Orm\Model_Soft') && ! is_subclass_of($rel->model_to, '\Mits430\Larasupple\Packages\Orm\Model_Temporal'))
 		{
 			// Throw if other is not soft
 			throw new RelationNotSoft('Both sides of the relation must be subclasses of Model_Soft or Model_Temporal if cascade delete is true. '.$rel->model_to.' was found instead.');
@@ -221,13 +221,13 @@ class Model_Soft extends Model
 			//Make sure that the other model is soft delete too
 			if ($rel_cascade)
 			{
-				if (! is_subclass_of($rel->model_to, 'Orm\Model_Soft'))
+				if (! is_subclass_of($rel->model_to, '\Mits430\Larasupple\Packages\Orm\Model_Soft'))
 				{
 					//Throw if other is not soft
 					throw new RelationNotSoft('Both sides of the relation must be subclasses of Model_Soft if cascade delete is true');
 				}
 
-				if (get_class($rel) != 'Orm\ManyMany')
+				if (get_class($rel) != '\Mits430\Larasupple\Packages\Orm\ManyMany')
 				{
 					$model_to = $rel->model_to;
 					$model_to::disable_filter();

@@ -12,7 +12,7 @@
  * @link       http://fuelphp.com
  */
 
-namespace Orm;
+namespace Mits430\Larasupple\Packages\Orm;
 
 class HasMany extends Relation
 {
@@ -21,11 +21,11 @@ class HasMany extends Relation
 		$this->name        = $name;
 		$this->model_from  = $from;
 		$this->model_to    = array_key_exists('model_to', $config)
-			? $config['model_to'] : \Inflector::get_namespace($from).'Model_'.\Inflector::classify($name);
+			? $config['model_to'] : \Mits430\Larasupple\Vendor\Inflector::get_namespace($from).'Model_'.\Mits430\Larasupple\Vendor\Inflector::classify($name);
 		$this->key_from    = array_key_exists('key_from', $config)
 			? (array) $config['key_from'] : $this->key_from;
 		$this->key_to      = array_key_exists('key_to', $config)
-			? (array) $config['key_to'] : (array) \Inflector::foreign_key($this->model_from);
+			? (array) $config['key_to'] : (array) \Mits430\Larasupple\Vendor\Inflector::foreign_key($this->model_from);
 		$this->conditions  = array_key_exists('conditions', $config)
 			? (array) $config['conditions'] : array();
 

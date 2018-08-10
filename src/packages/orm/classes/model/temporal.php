@@ -12,12 +12,12 @@
  * @link       http://fuelphp.com
  */
 
-namespace Orm;
+namespace Mits430\Larasupple\Packages\Orm;
 
 /**
  * Allows revisions of database entries to be kept when updates are made.
  *
- * @package Orm
+ * @package \Mits430\Larasupple\Packages\Orm
  * @author  Fuel Development Team
  */
 class Model_Temporal extends Model
@@ -191,7 +191,7 @@ class Model_Temporal extends Model
 	{
 		// if a timestamp is set and that we have a temporal relation
 		$rel = static::relations($property);
-		if ($rel && is_subclass_of($rel->model_to, 'Orm\Model_Temporal'))
+		if ($rel && is_subclass_of($rel->model_to, '\Mits430\Larasupple\Packages\Orm\Model_Temporal'))
 		{
 			// find a specific revision or the newest if lazy timestamp is null
 			$lazy_timestamp = $this->_lazy_timestamp ?: static::temporal_property('max_timestamp') - 1;
@@ -597,7 +597,7 @@ class Model_Temporal extends Model
 
 			if ($relCascade)
 			{
-				if(get_class($rel) != 'Orm\ManyMany')
+				if(get_class($rel) != '\Mits430\Larasupple\Packages\Orm\ManyMany')
 				{
 					// Loop through and call delete on all the models
 					foreach($rel->get($this) as $model)

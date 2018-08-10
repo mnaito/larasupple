@@ -12,7 +12,7 @@
  * @link       http://fuelphp.com
  */
 
-namespace Orm;
+namespace Mits430\Larasupple\Packages\Orm;
 
 /**
  * Observer class to generate SEO friendly slugs from a model property (usually something like a title)
@@ -117,7 +117,7 @@ class Observer_Slug extends Observer
 			{
 				$source .= $this->_separator.$obj->{$property};
 			}
-			$slug = \Inflector::friendly_title(substr($source, 1), $this->_separator, true);
+			$slug = \Mits430\Larasupple\Vendor\Inflector::friendly_title(substr($source, 1), $this->_separator, true);
 
 			$query->where($this->_property, 'like', $slug.'%');
 		}
@@ -192,7 +192,7 @@ class Observer_Slug extends Observer
 		{
 			$source .= $this->_separator.$obj->{$property};
 		}
-		$slug = \Inflector::friendly_title(substr($source, 1), $this->_separator, true);
+		$slug = \Mits430\Larasupple\Vendor\Inflector::friendly_title(substr($source, 1), $this->_separator, true);
 
 		// update it if it's different from the current one
 		// and is not manually assigned

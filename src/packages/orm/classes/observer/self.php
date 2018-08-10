@@ -12,7 +12,7 @@
  * @link       http://fuelphp.com
  */
 
-namespace Orm;
+namespace Mits430\Larasupple\Packages\Orm;
 
 /**
  * Dummy observer class, which allows you to define observer methods in the

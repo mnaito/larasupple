@@ -12,7 +12,7 @@
  * @link       http://fuelphp.com
  */
 
-namespace Orm;
+namespace Mits430\Larasupple\Packages\Orm;
 
 /**
  * Implements NestedSets (http://en.wikipedia.org/wiki/Nested_set_model)

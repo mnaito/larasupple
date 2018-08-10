@@ -54,19 +54,23 @@ abstract class Database_Connection
 		$config = [
 			'type' => $name,
 			'connection'  => array(
+				'dsn'        => '',
+				'persistent'   => false,
+				'compress'   => true,
+				'init_sql'   => "SET time_zone = \"+09:00\";",
 				'hostname'   => env("DB_HOST"),
 				'port'   => "3306",
 				'username'   => env("DB_USERNAME"),
 				'password'   => env("DB_PASSWORD"),
 				'database'   => env("DB_DATABASE"),
-				'identifier'   => "`",
-				'table_prefix'   => "",
-				'charset'   => "utf8",
-				'collation'   => false,
-				'enable_cache'   => true,
-				'profiling'   => true,
-				'readonly'   => false,
 			),
+			'identifier'   => "`",
+			'table_prefix'   => "",
+			'charset'   => "utf8",
+			'collation'   => false,
+			'enable_cache'   => true,
+			'profiling'   => false,
+			'readonly'   => false,
 		];
 		
 		// Create the database connection instance

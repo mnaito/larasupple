@@ -12,13 +12,13 @@
  * @link       http://fuelphp.com
  */
 
-namespace Orm;
+namespace Mits430\Larasupple\Packages\Orm;
 
 /**
  * Adds temporal properties to the query object to allow for correct relation
  * filtering on joins.
  *
- * @package Orm
+ * @package \Mits430\Larasupple\Packages\Orm
  * @author  Fuel Development Team
  */
 class Query_Temporal extends Query
@@ -56,7 +56,7 @@ class Query_Temporal extends Query
 	 */
 	protected function modify_join_result($join_result, $name)
 	{
-		if ( ! is_null($this->timestamp) and is_subclass_of($join_result[$name]['model'], '\Orm\Model_Temporal'))
+		if ( ! is_null($this->timestamp) and is_subclass_of($join_result[$name]['model'], '\\Mits430\Larasupple\Packages\Orm\Model_Temporal'))
 		{
 			//Add the needed conditions to allow for temporal-ness
 			$table      = $join_result[$name]['table'][1];
@@ -70,7 +70,7 @@ class Query_Temporal extends Query
 
 	public function hydrate(&$row, $models, &$result, $model = null, $select = null, $primary_key = null)
 	{
-		if( is_subclass_of($model, '\Orm\Model_Temporal'))
+		if( is_subclass_of($model, '\\Mits430\Larasupple\Packages\Orm\Model_Temporal'))
 		{
 			$primary_key[] = $this->timestamp_start_col;
 			$primary_key[] = $this->timestamp_end_col;

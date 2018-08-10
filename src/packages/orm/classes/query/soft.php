@@ -12,12 +12,12 @@
  * @link       http://fuelphp.com
  */
 
-namespace Orm;
+namespace Mits430\Larasupple\Packages\Orm;
 
 /**
  * Overrides the default Query object to allow for custom soft delete filtering on queries.
  *
- * @package Orm
+ * @package \Mits430\Larasupple\Packages\Orm
  * @author  Fuel Development Team
  */
 class Query_Soft extends Query
@@ -78,7 +78,7 @@ class Query_Soft extends Query
 
 	protected function modify_join_result($join_result, $name)
 	{
-		if ( ! is_null($this->_col_name) and is_subclass_of($join_result[$name]['model'], '\Orm\Model_Soft'))
+		if ( ! is_null($this->_col_name) and is_subclass_of($join_result[$name]['model'], '\\Mits430\Larasupple\Packages\Orm\Model_Soft'))
 		{
 			$table = $join_result[$name]['table'][1];
 			$join_result[$name]['join_on'][] = array("$table.$this->_col_name", 'IS', \DB::expr('NULL'));

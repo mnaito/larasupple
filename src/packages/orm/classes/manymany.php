@@ -12,7 +12,7 @@
  * @link       http://fuelphp.com
  */
 
-namespace Orm;
+namespace Mits430\Larasupple\Packages\Orm;
 
 class ManyMany extends Relation
 {
@@ -45,7 +45,7 @@ class ManyMany extends Relation
 		$this->name        = $name;
 		$this->model_from  = $from;
 		$this->model_to    = array_key_exists('model_to', $config)
-			? $config['model_to'] : \Inflector::get_namespace($from).'Model_'.\Inflector::classify($name);
+			? $config['model_to'] : \Mits430\Larasupple\Vendor\Inflector::get_namespace($from).'Model_'.\Mits430\Larasupple\Vendor\Inflector::classify($name);
 		$this->key_from    = array_key_exists('key_from', $config)
 			? (array) $config['key_from'] : $this->key_from;
 		$this->key_to      = array_key_exists('key_to', $config)
@@ -62,12 +62,12 @@ class ManyMany extends Relation
 			$table_name = array($this->model_from, $this->model_to);
 			natcasesort($table_name);
 			$table_name = array_merge($table_name);
-			$this->table_through = \Inflector::tableize($table_name[0]).'_'.\Inflector::tableize($table_name[1]);
+			$this->table_through = \Mits430\Larasupple\Vendor\Inflector::tableize($table_name[0]).'_'.\Mits430\Larasupple\Vendor\Inflector::tableize($table_name[1]);
 		}
 		$this->key_through_from = ! empty($config['key_through_from'])
-			? (array) $config['key_through_from'] : (array) \Inflector::foreign_key($this->model_from);
+			? (array) $config['key_through_from'] : (array) \Mits430\Larasupple\Vendor\Inflector::foreign_key($this->model_from);
 		$this->key_through_to = ! empty($config['key_through_to'])
-			? (array) $config['key_through_to'] : (array) \Inflector::foreign_key($this->model_to);
+			? (array) $config['key_through_to'] : (array) \Mits430\Larasupple\Vendor\Inflector::foreign_key($this->model_to);
 
 		$this->cascade_save    = array_key_exists('cascade_save', $config)
 			? $config['cascade_save'] : $this->cascade_save;

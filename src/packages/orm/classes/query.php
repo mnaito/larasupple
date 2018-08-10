@@ -12,7 +12,9 @@
  * @link       http://fuelphp.com
  */
 
-namespace Orm;
+namespace Mits430\Larasupple\Packages\Orm;
+
+require __DIR__ . '/../../../vendor/Base.php';
 
 /**
  * ORM query object.
@@ -1175,7 +1177,7 @@ class Query
 				$obj[$f] = $row[$s[1]];
 				if (in_array($f, $primary_key))
 				{
-					$obj[$f] = \Orm\Observer_Typing::typecast($f, $obj[$f], call_user_func($model.'::property', $f));
+					$obj[$f] = \Mits430\Larasupple\Packages\Orm\Observer_Typing::typecast($f, $obj[$f], call_user_func($model.'::property', $f));
 				}
 				unset($row[$s[1]]);
 			}

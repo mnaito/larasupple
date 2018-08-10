@@ -5,35 +5,25 @@
  * Fuel is a fast, lightweight, community driven PHP5 framework.
  *
  * @package    Fuel
- * @version    1.8
+ * @version    1.7
  * @author     Fuel Development Team
  * @license    MIT License
- * @copyright  2010 - 2016 Fuel Development Team
+ * @copyright  2010 - 2013 Fuel Development Team
  * @link       http://fuelphp.com
  */
 
-namespace Mits430\Larasupple\Packages\Orm;
+namespace Mits430\Larasupple\Packages\Observer;
 
 /**
- * UpdatedAt observer. Makes sure the updated timestamp column in a Model record
+ * Modified observer. Makes sure the updated timestamp column in a Model record
  * gets a value when a record is updated in the database.
  */
-class Observer_UpdatedAt extends Observer
+class Observer_Modified extends \Mits430\Larasupple\Packages\Orm\Observer
 {
-	/**
-	 * @var  bool  set true to use mySQL timestamp instead of UNIX timestamp
-	 */
-	public static $mysql_timestamp = false;
-
 	/**
 	 * @var  string  property to set the timestamp on
 	 */
-	public static $property = 'updated_at';
-
-	/**
-	 * @var  bool  true to use mySQL timestamp instead of UNIX timestamp
-	 */
-	protected $_mysql_timestamp;
+	public static $property = 'modified';
 
 	/**
 	 * @var  string  property to set the timestamp on
@@ -54,27 +44,26 @@ class Observer_UpdatedAt extends Observer
 	public function __construct($class)
 	{
 		$props = $class::observers(get_class($this));
-		$this->_mysql_timestamp  = isset($props['mysql_timestamp']) ? $props['mysql_timestamp'] : static::$mysql_timestamp;
 		$this->_property         = isset($props['property']) ? $props['property'] : static::$property;
 		$this->_relations        = isset($props['relations']) ? $props['relations'] : array();
 	}
 
 	/**
-	 * Set the UpdatedAt property to the current time.
+	 * Set the Modified property to the current time.
 	 *
 	 * @param  Model  Model object subject of this observer method
 	 */
-	public function before_save(Model $obj)
+	public function before_save(\Mits430\Larasupple\Packages\Orm\Model $obj)
 	{
 		$this->before_update($obj);
 	}
 
 	/**
-	 * Set the UpdatedAt property to the current time.
+	 * Set the Modified property to the current time.
 	 *
 	 * @param  Model  Model object subject of this observer method
 	 */
-	public function before_update(Model $obj)
+	public function before_update(\Mits430\Larasupple\Packages\Orm\Model $obj)
 	{
 		// If there are any relations loop through and check if any of them have been changed
 		$relation_changed = false;
@@ -87,12 +76,9 @@ class Observer_UpdatedAt extends Observer
 			}
 		}
 
-		$objClassName = get_class($obj);
-		$objProperties = $objClassName::properties();
-
-		if ($obj->is_changed(array_keys($objProperties)) or $relation_changed)
+		if ($obj->is_changed() or $relation_changed)
 		{
-			$obj->{$this->_property} = $this->_mysql_timestamp ? \Date::time()->format('mysql') : \Date::time()->get_timestamp();
+			$obj->{$this->_property} = \DB::expr('NOW()');
 		}
 	}
 
@@ -105,7 +91,7 @@ class Observer_UpdatedAt extends Observer
 	 *
 	 * @return bool
 	 */
-	protected function relation_changed(Model $obj, $relation)
+	protected function relation_changed(\Mits430\Larasupple\Packages\Orm\Model $obj, $relation)
 	{
 		// Check that the relation exists
 		if ($obj->relations($relation) === false)
