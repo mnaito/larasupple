@@ -1,7 +1,4 @@
 <?php
-// only for test
-Route::get('test', TestController::class.'@index');
-
 // default debug method
 Route::get('debug', DebugController::class.'@index');
 
