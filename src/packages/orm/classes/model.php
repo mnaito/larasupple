@@ -1283,7 +1283,7 @@ class Model implements \ArrayAccess, \Iterator, \Mits430\Larasupple\Packages\San
 
 		if ($use_transaction)
 		{
-			$db = \Database_Connection::instance(static::connection(true));
+			$db = \Mits430\Larasupple\Packages\Database\Database_Connection::instance(static::connection(true));
 			$db->start_transaction();
 		}
 
@@ -1361,6 +1361,32 @@ class Model implements \ArrayAccess, \Iterator, \Mits430\Larasupple\Packages\San
 		return $return;
 	}
 
+	/**
+	 * Save bulk insert
+	 *
+	 * @param  mixed  $datum
+     */
+	public function saveAll($datum)
+	{
+		$table = static::table();
+        $columns = array_keys(static::properties());
+        $query = \DB::insert($table)
+                ->columns($columns);
+		
+        foreach ($datum as $data) {
+            $values = [];
+            ($data instanceof Model) and ($data = $data->to_array());
+            foreach ($columns as $col) {
+                $values[] = (isset($data[$col])) ? $data[$col] : null;
+            }
+            $query->values($values);
+        }
+		
+		\Log::debug($query->compile());
+		
+        return $query->execute();
+	}
+	
 	/**
 	 * Save using INSERT
 	 */

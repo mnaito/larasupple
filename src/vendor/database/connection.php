@@ -46,13 +46,19 @@ abstract class Database_Connection
 	 */
 	public static function instance($name = null, array $config = null, $writable = true)
 	{
-		$name = env("DB_CONNECTION");
+		$type = env("DB_CONNECTION");
+		
+		if($name == null){
+			$name = 'mysqli';
+		}
+		
+		$config['connection'] = \Config::get('database.connections.' . $name);
 		
 		// Set the driver class name
-		$driver = '\\Mits430\\Larasupple\\Packages\\Database\\Database_' . ucfirst($name) . '_Connection';
+		$driver = '\\Mits430\\Larasupple\\Packages\\Database\\Database_' . ucfirst($type) . '_Connection';
 
-		$config = [
-			'type' => $name,
+		$ini_config = [
+			'type' => $type,
 			'connection'  => array(
 				'dsn'        => '',
 				'persistent'   => false,
@@ -72,6 +78,8 @@ abstract class Database_Connection
 			'profiling'   => false,
 			'readonly'   => false,
 		];
+		
+		$config = array_merge($ini_config, $config);
 		
 		// Create the database connection instance
 		new $driver($name, $config);
