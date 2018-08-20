@@ -1370,21 +1370,38 @@ class Model implements \ArrayAccess, \Iterator, \Mits430\Larasupple\Packages\San
 	{
 		$table = static::table();
         $columns = array_keys(static::properties());
-        $query = \DB::insert($table)
-                ->columns($columns);
+        $query = \Mits430\Larasupple\Packages\DB::insert($table)->columns($columns);
 		
-        foreach ($datum as $data) {
+		$now = now();
+		
+		$idx = 1;
+		while($data = array_shift($datum)){
+
             $values = [];
             ($data instanceof Model) and ($data = $data->to_array());
             foreach ($columns as $col) {
                 $values[] = (isset($data[$col])) ? $data[$col] : null;
+				
+				if((strcmp($col, "created") == 0 or strcmp($col, "modified") == 0) &&
+						$values[count($values) - 1] == null){
+					$values[count($values) - 1] = $now;
+				}
+
             }
             $query->values($values);
+			
+			if($idx%1000 == 0){
+				$query->execute();
+				$query = \Mits430\Larasupple\Packages\DB::insert($table)->columns($columns);
+			}
+			$idx++;
         }
 		
-		\Log::debug($query->compile());
+		if($idx%1000 != 1){
+			$query->execute();
+		}
 		
-        return $query->execute();
+		return;
 	}
 	
 	/**
