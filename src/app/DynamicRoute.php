@@ -72,7 +72,9 @@ class DynamicRoute
 			
 			// パスに引数が含まれている場合
 			if($numPathComponents > 2){
+				$param = array_reverse($param);
 				$param[] = $pathInfo['filename'];
+				$param = array_reverse($param);
 				return self::goDynamicRoute($request, $pathInfo['dirname'], $param);
 			}
 			
