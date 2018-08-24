@@ -24,7 +24,7 @@ class RequestLogger
 		}
 		
 		\Log::debug('Creating a new ' . $requestType . ' Request with URI = "'. $request->getPathInfo() .'"');
-		\Log::debug('Method '. $request->method() .'. parameters ' . print_r($request->query(), true));
+		\Log::debug('Method '. $request->method() .'. parameters ' . print_r($request->all(), true));
 		
 		return $next($request);
 	}
