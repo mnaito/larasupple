@@ -34,10 +34,10 @@ class Model extends \Mits430\Larasupple\Packages\Orm\Model
 	 */
 	protected static $_valid_relations = array(
 		// Extended relation types
-		'belongs_to'    => 'Mits430\\Larasupple\\Packages\\BelongsTo',
-		'has_one'       => 'Mits430\\Larasupple\\Packages\\HasOne',
-		'has_many'      => 'Mits430\\Larasupple\\Packages\\HasMany',
-		'many_many'     => 'Mits430\\Larasupple\\Packages\\ManyMany',
+		'belongs_to'    => 'Mits430\\Larasupple\\Packages\\Orm\\BelongsTo',
+		'has_one'       => 'Mits430\\Larasupple\\Packages\\Orm\\HasOne',
+		'has_many'      => 'Mits430\\Larasupple\\Packages\\Orm\\HasMany',
+		'many_many'     => 'Mits430\\Larasupple\\Packages\\Orm\\ManyMany',
 		
 		// More relation types
 		'belongs_to_table' => 'Mits430\\Larasupple\\Packages\\BelongsToTable',
