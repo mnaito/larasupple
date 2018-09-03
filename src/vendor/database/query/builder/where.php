@@ -13,6 +13,8 @@
 
 namespace Mits430\Larasupple\Vendor\Database;
 
+require __DIR__ . '/../../../Base.php';
+
 abstract class Database_Query_Builder_Where extends \Mits430\Larasupple\Vendor\Database\Database_Query_Builder
 {
 	/**
