@@ -1385,9 +1385,9 @@ class Model implements \ArrayAccess, \Iterator, \Mits430\Larasupple\Packages\San
 				if((strcmp($col, "created") == 0 or strcmp($col, "modified") == 0) &&
 						$values[count($values) - 1] == null){
 					
-					if(strcmp($col, "created") == 0 && $data['reg'] != '0000-00-00 00:00:00' && isset($data['reg'])){
+					if(strcmp($col, "created") == 0 && isset($data['reg']) && $data['reg'] != '0000-00-00 00:00:00'){
 						$values[count($values) - 1] = $data['reg'];
-					} elseif(strcmp($col, "modified") == 0 && $data['timestamp'] != '0000-00-00 00:00:00' && isset($data['timestamp'])){
+					} elseif(strcmp($col, "modified") == 0 && isset($data['timestamp']) && $data['timestamp'] != '0000-00-00 00:00:00'){
 						$values[count($values) - 1] = $data['timestamp'];
 					} else {
 						$values[count($values) - 1] = $now;
