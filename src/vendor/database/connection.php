@@ -46,12 +46,16 @@ abstract class Database_Connection
 	 */
 	public static function instance($name = null, array $config = null, $writable = true)
 	{
+        if($name == null){
+            $name = 'mysqli';
+        }
+
+        if (isset(static::$instances[$name])) {
+            return static::$instances[$name];
+        }
+
 		$type = env("DB_CONNECTION");
-		
-		if($name == null){
-			$name = 'mysqli';
-		}
-		
+
 		$config['connection'] = \Config::get('database.connections.' . $name);
 		
 		// Set the driver class name
@@ -65,14 +69,14 @@ abstract class Database_Connection
 				'compress'   => true,
 				'init_sql'   => "SET time_zone = \"+09:00\";",
 				'hostname'   => env("DB_HOST"),
-				'port'   => "3306",
+				'port'       => env("DB_PORT"),
 				'username'   => env("DB_USERNAME"),
 				'password'   => env("DB_PASSWORD"),
 				'database'   => env("DB_DATABASE"),
 			),
 			'identifier'   => "`",
 			'table_prefix'   => "",
-			'charset'   => "utf8",
+			'charset'   => env("DB_CHARSET"),
 			'collation'   => false,
 			'enable_cache'   => true,
 			'profiling'   => false,
