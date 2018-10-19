@@ -9,18 +9,21 @@ use Illuminate\Support\Facades\Request;
 trait ViewSelector
 {
     /**
-     * @var array variables for view template engine
-     */
-    protected static $viewVariables = [];
-
-    /**
      * set view variable
      * @param $name
      * @param $var
      */
     protected static function set($name, $var)
     {
-        self::$viewVariables[$name] = $var;
+		$viewVariables = \Illuminate\Support\Facades\Request::get('viewVariables');
+		if(!is_array($viewVariables)){
+			$viewVariables = [];
+		}
+		
+        $viewVariables[$name] = $var;
+		
+		$request = \Illuminate\Support\Facades\Request::instance();
+		$request->attributes->add(['viewVariables' => $viewVariables]);
     }
 
 
@@ -41,7 +44,8 @@ trait ViewSelector
 
             $template = implode('/', $requestedPath);
         }
-
-        return view($template)->with(self::$viewVariables);
+		
+		$viewVariables = \Illuminate\Support\Facades\Request::get('viewVariables');
+        return view($template)->with($viewVariables);
     }
 }

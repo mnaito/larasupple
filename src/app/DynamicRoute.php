@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\App;
  */
 class DynamicRoute
 {
-    public static function goDynamicRoute(Request $request, $uri)
+    public static function goDynamicRoute(Request $request, $uri, $param = [])
     {
         // 拡張子判断
         $pathInfo = pathinfo($uri);
@@ -40,7 +40,7 @@ class DynamicRoute
             $pathComponents[] = 'index';
         }
 
-        $lastUriChar = substr($request->getRequestUri(), -1, 1);
+        $lastUriChar = substr($request->getPathInfo(), -1, 1);
         if ($lastUriChar === '/') {
             $pathComponents[] = 'index';
             $uriWithoutExtension .= '/index';
@@ -67,8 +67,17 @@ class DynamicRoute
         try {
             $ref = new \ReflectionClass($controllerName);
             $ref->getMethod($action);
-            return App::call("{$controllerName}@{$action}");
+            return App::call("{$controllerName}@{$action}", $param);
         } catch (\ReflectionException $e) {
+			
+			// パスに引数が含まれている場合
+			if($numPathComponents > 2){
+				$param = array_reverse($param);
+				$param[] = $pathInfo['filename'];
+				$param = array_reverse($param);
+				return self::goDynamicRoute($request, $pathInfo['dirname'], $param);
+			}
+			
             // アクションなし、静的ページとして表示
             return App::call(\App\Http\Controllers\RouteFallbackController::class.'@handle');
         }
