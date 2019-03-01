@@ -62,6 +62,7 @@ class Database_MySQLi_Connection extends \Mits430\Larasupple\Vendor\Database\Dat
 		// Extract the connection parameters, adding required variables
 		extract($this->_config['connection'] + array(
 			'database'   => '',
+			'host'       => '',
 			'hostname'   => '',
 			'port'       => '',
 			'socket'     => '',
@@ -70,6 +71,7 @@ class Database_MySQLi_Connection extends \Mits430\Larasupple\Vendor\Database\Dat
 			'persistent' => false,
 			'compress'	 => true,
 		));
+		$hostname = $host;
 
 		try
 		{
